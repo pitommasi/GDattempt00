@@ -2979,6 +2979,7 @@ GameObject:
   - component: {fileID: 1043359540}
   - component: {fileID: 1043359542}
   - component: {fileID: 1043359541}
+  - component: {fileID: 1043359543}
   m_Layer: 5
   m_Name: life_icon_0
   m_TagString: Untagged
@@ -3043,6 +3044,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1043359539}
   m_CullTransparentMesh: 1
+--- !u!114 &1043359543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1043359539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdb8434577ed0a649b4073ab3cea5fb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIPulse
+  pulseSpeed: 3
+  pulseAmount: 0.15
 --- !u!1 &1049291613
 GameObject:
   m_ObjectHideFlags: 0
@@ -4045,6 +4060,7 @@ GameObject:
   - component: {fileID: 1517879477}
   - component: {fileID: 1517879479}
   - component: {fileID: 1517879478}
+  - component: {fileID: 1517879480}
   m_Layer: 5
   m_Name: life_icon_2
   m_TagString: Untagged
@@ -4109,6 +4125,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1517879476}
   m_CullTransparentMesh: 1
+--- !u!114 &1517879480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517879476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdb8434577ed0a649b4073ab3cea5fb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIPulse
+  pulseSpeed: 3
+  pulseAmount: 0.15
 --- !u!1 &1524619664
 GameObject:
   m_ObjectHideFlags: 0
@@ -5384,6 +5414,7 @@ GameObject:
   - component: {fileID: 2143220783}
   - component: {fileID: 2143220785}
   - component: {fileID: 2143220784}
+  - component: {fileID: 2143220786}
   m_Layer: 5
   m_Name: life_icon_1
   m_TagString: Untagged
@@ -5448,6 +5479,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2143220782}
   m_CullTransparentMesh: 1
+--- !u!114 &2143220786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2143220782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdb8434577ed0a649b4073ab3cea5fb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIPulse
+  pulseSpeed: 3
+  pulseAmount: 0.15
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
