@@ -1,0 +1,311 @@
+using UnityEngine;
+
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(SpriteRenderer))]
+public class SmoglingPatrol : MonoBehaviour {
+    private enum PatrolState {
+        Pausing,
+        Accelerating,
+        Cruising,
+        Decelerating
+    }
+
+    [Header("Patrol Points")]
+    [SerializeField] private Transform leftPoint;
+    [SerializeField] private Transform rightPoint;
+    [SerializeField] private bool startMovingRight = true;
+    [SerializeField] private bool startWithPause = true;
+
+    [Header("Speed Sprites")]
+    [SerializeField] private Sprite sprite0Idle;
+    [SerializeField] private Sprite sprite1Slow;
+    [SerializeField] private Sprite sprite2Medium;
+    [SerializeField] private Sprite sprite3Fast;
+
+    [Tooltip("Enable this if the original artwork represents movement towards the right.")]
+    [SerializeField] private bool spritesFaceRight = true;
+
+    [Header("Movement")]
+    [Min(0.01f)]
+    [SerializeField] private float maximumSpeed = 1.5f;
+
+    [Min(0.01f)]
+    [SerializeField] private float acceleration = 2f;
+
+    [Min(0.01f)]
+    [SerializeField] private float deceleration = 2.5f;
+
+    [Tooltip("Distance from the target at which the Smogling starts slowing down.")]
+    [Min(0.01f)]
+    [SerializeField] private float slowdownDistance = 1f;
+
+    [Tooltip("Prevents the Smogling from stopping before it reaches the patrol point.")]
+    [Min(0.01f)]
+    [SerializeField] private float minimumApproachSpeed = 0.15f;
+
+    [Tooltip("How close it must be to a patrol point before snapping exactly onto it.")]
+    [Min(0.001f)]
+    [SerializeField] private float arrivalTolerance = 0.03f;
+
+    [Header("Pause At Each End")]
+    [Min(0f)]
+    [SerializeField] private float minimumPauseSeconds = 0.5f;
+
+    [Min(0f)]
+    [SerializeField] private float maximumPauseSeconds = 1.3f;
+
+    [Header("Runtime Debug - Do Not Edit During Play")]
+    [SerializeField] private PatrolState state;
+    [SerializeField] private float currentSpeed;
+    [SerializeField] private float pauseTimerRemaining;
+    [SerializeField] private int direction;
+
+    private Rigidbody2D body;
+    private SpriteRenderer spriteRenderer;
+
+    private void Awake() {
+        body = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    private void Start() {
+        if (!ValidateSetup()) {
+            enabled = false;
+            return;
+        }
+
+        if (maximumPauseSeconds < minimumPauseSeconds) {
+            float temporaryValue = minimumPauseSeconds;
+            minimumPauseSeconds = maximumPauseSeconds;
+            maximumPauseSeconds = temporaryValue;
+        }
+
+        minimumApproachSpeed = Mathf.Min(
+            minimumApproachSpeed,
+            maximumSpeed
+        );
+
+        direction = startMovingRight ? 1 : -1;
+        currentSpeed = 0f;
+
+        if (startWithPause) {
+            BeginPause(false);
+        } else {
+            state = PatrolState.Accelerating;
+            UpdateVisual();
+        }
+    }
+
+    private void FixedUpdate() {
+        if (state == PatrolState.Pausing) {
+            UpdatePause();
+            return;
+        }
+
+        if (HasReachedOrPassedTarget() ||
+            DistanceToTarget() <= arrivalTolerance) {
+            ArriveAtTarget();
+            return;
+        }
+
+        float distanceToTarget = DistanceToTarget();
+
+        switch (state) {
+            case PatrolState.Accelerating:
+                if (distanceToTarget <= slowdownDistance) {
+                    state = PatrolState.Decelerating;
+                } else {
+                    currentSpeed = Mathf.MoveTowards(
+                        currentSpeed,
+                        maximumSpeed,
+                        acceleration * Time.fixedDeltaTime
+                    );
+
+                    if (currentSpeed >= maximumSpeed - 0.001f) {
+                        currentSpeed = maximumSpeed;
+                        state = PatrolState.Cruising;
+                    }
+                }
+
+                break;
+
+            case PatrolState.Cruising:
+                currentSpeed = maximumSpeed;
+
+                if (distanceToTarget <= slowdownDistance) {
+                    state = PatrolState.Decelerating;
+                }
+
+                break;
+
+            case PatrolState.Decelerating:
+                currentSpeed = Mathf.MoveTowards(
+                    currentSpeed,
+                    0f,
+                    deceleration * Time.fixedDeltaTime
+                );
+
+                currentSpeed = Mathf.Max(
+                    currentSpeed,
+                    minimumApproachSpeed
+                );
+
+                break;
+        }
+
+        ApplyMovement();
+    }
+
+    private void UpdatePause() {
+        currentSpeed = 0f;
+
+        body.linearVelocity = new Vector2(
+            0f,
+            body.linearVelocity.y
+        );
+
+        pauseTimerRemaining -= Time.fixedDeltaTime;
+        UpdateVisual();
+
+        if (pauseTimerRemaining <= 0f) {
+            pauseTimerRemaining = 0f;
+            state = PatrolState.Accelerating;
+        }
+    }
+
+    private void ApplyMovement() {
+        body.linearVelocity = new Vector2(
+            direction * currentSpeed,
+            body.linearVelocity.y
+        );
+
+        UpdateVisual();
+    }
+
+    private void ArriveAtTarget() {
+        float targetX = GetTargetX();
+
+        body.position = new Vector2(
+            targetX,
+            body.position.y
+        );
+
+        BeginPause(true);
+    }
+
+    private void BeginPause(bool reverseDirection) {
+        currentSpeed = 0f;
+
+        body.linearVelocity = new Vector2(
+            0f,
+            body.linearVelocity.y
+        );
+
+        if (reverseDirection) {
+            direction *= -1;
+        }
+
+        pauseTimerRemaining = Random.Range(
+            minimumPauseSeconds,
+            maximumPauseSeconds
+        );
+
+        state = PatrolState.Pausing;
+        UpdateVisual();
+    }
+
+    private void UpdateVisual() {
+        spriteRenderer.flipX = spritesFaceRight
+            ? direction < 0
+            : direction > 0;
+
+        if (state == PatrolState.Pausing ||
+            currentSpeed <= 0.001f) {
+            spriteRenderer.sprite = sprite0Idle;
+            return;
+        }
+
+        float speedRatio = currentSpeed / maximumSpeed;
+
+        if (speedRatio < 0.34f) {
+            spriteRenderer.sprite = sprite1Slow;
+        } else if (speedRatio < 0.67f) {
+            spriteRenderer.sprite = sprite2Medium;
+        } else {
+            spriteRenderer.sprite = sprite3Fast;
+        }
+    }
+
+    private float DistanceToTarget() {
+        return Mathf.Abs(body.position.x - GetTargetX());
+    }
+
+    private float GetTargetX() {
+        return direction > 0
+            ? rightPoint.position.x
+            : leftPoint.position.x;
+    }
+
+    private bool HasReachedOrPassedTarget() {
+        if (direction > 0) {
+            return body.position.x >= rightPoint.position.x;
+        }
+
+        return body.position.x <= leftPoint.position.x;
+    }
+
+    private bool ValidateSetup() {
+        
+        if (leftPoint == null || rightPoint == null) {
+            Debug.LogError(
+                $"{name}: assign Left Point and Right Point.",
+                this
+            );
+
+            return false;
+        }
+
+        Debug.Log(
+            $"{name}: " +
+            $"Left local X = {leftPoint.localPosition.x}, " +
+            $"Right local X = {rightPoint.localPosition.x}, " +
+            $"Left world X = {leftPoint.position.x}, " +
+            $"Right world X = {rightPoint.position.x}",
+            this
+        );
+
+        if (leftPoint.position.x >= rightPoint.position.x) {
+            Debug.LogError(
+                $"{name}: Left Point must be positioned to the left of Right Point.",
+                this
+            );
+
+            return false;
+        }
+
+        if (sprite0Idle == null ||
+            sprite1Slow == null ||
+            sprite2Medium == null ||
+            sprite3Fast == null) {
+            Debug.LogError(
+                $"{name}: assign all four Smogling sprites.",
+                this
+            );
+
+            return false;
+        }
+
+        return true;
+    }
+
+    private void OnDisable() {
+        if (body == null) {
+            return;
+        }
+
+        body.linearVelocity = new Vector2(
+            0f,
+            body.linearVelocity.y
+        );
+    }
+}
