@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f9fc3181ed854a84987f6461b012a477
+guid: 956dc651d8d5f1b49ad37f94e3ba08cd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6537089701838389941
-    second: Fountain_0
+      213: 946645972091919692
+    second: SHOPFacadeEdge_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,23 +126,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Fountain_0
+      name: SHOPFacadeEdge_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 875
-        height: 610
+        width: 221
+        height: 1145
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5b201f6e27868ba50800000000000000
-      internalID: 6537089701838389941
+      spriteID: c4dd79efe79232d00800000000000000
+      internalID: 946645972091919692
       vertices: []
       indices: 
       edges: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: d96511720da85964391040b04d754d0d
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Fountain_0: 6537089701838389941
+      SHOPFacadeEdge_0: 946645972091919692
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
