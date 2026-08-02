@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 67573575c02035040b4c89f39045f31d
+guid: bfc4b889e66ed0d4ca960eef44f15a5c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5418605693620544621
-    second: repairshopFacade_0
+      213: 8223059086555020664
+    second: warehouseFacadeW_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,23 +126,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: repairshopFacade_0
+      name: warehouseFacadeW_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1985
-        height: 914
+        width: 2819
+        height: 1145
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 39b96d5a4de3dc4b0800000000000000
-      internalID: -5418605693620544621
+      spriteID: 87df82debac2e1270800000000000000
+      internalID: 8223059086555020664
       vertices: []
       indices: 
       edges: []
@@ -152,7 +152,7 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      repairshopFacade_0: -5418605693620544621
+      warehouseFacadeW_0: 8223059086555020664
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

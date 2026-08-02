@@ -59,7 +59,7 @@ public class PlayerHealth : MonoBehaviour {
         Debug.Log($"{name}: starting with {currentLives} lives.");
     }
 
-    public void TakeDamage() {
+    public void TakeDamage(float delayOverrideSeconds = -1f) {
         if (damageSequenceRunning) {
             return;
         }
@@ -72,12 +72,20 @@ public class PlayerHealth : MonoBehaviour {
         );
 
         if (currentLives <= 0) {
-            StartCoroutine(GameOverRoutine());
+            float gameOverDelay = delayOverrideSeconds >= 0f
+                ? delayOverrideSeconds
+                : gameOverDelaySeconds;
+
+            StartCoroutine(GameOverRoutine(gameOverDelay));
         } else {
-            StartCoroutine(RespawnRoutine());
+            float respawnDelay = delayOverrideSeconds >= 0f
+                ? delayOverrideSeconds
+                : respawnDelaySeconds;
+
+            StartCoroutine(RespawnRoutine(respawnDelay));
         }
     }
-
+    
     public void Bounce(float bounceSpeed) {
         if (damageSequenceRunning || !body.simulated) {
             return;
@@ -89,12 +97,12 @@ public class PlayerHealth : MonoBehaviour {
         );
     }
 
-    private IEnumerator RespawnRoutine() {
+    private IEnumerator RespawnRoutine(float delayBeforeRespawn) {
         damageSequenceRunning = true;
 
         SetPlayerActive(false);
 
-        yield return new WaitForSeconds(respawnDelaySeconds);
+        yield return new WaitForSeconds(delayBeforeRespawn);
 
         transform.position = respawnPoint.position;
 
@@ -105,14 +113,14 @@ public class PlayerHealth : MonoBehaviour {
         damageSequenceRunning = false;
     }
 
-    private IEnumerator GameOverRoutine() {
+    private IEnumerator GameOverRoutine(float delayBeforeReload) {
         damageSequenceRunning = true;
 
         Debug.Log($"{name}: GAME OVER.", this);
 
         SetPlayerActive(false);
 
-        yield return new WaitForSeconds(gameOverDelaySeconds);
+        yield return new WaitForSeconds(delayBeforeReload);
 
         SceneManager.LoadScene(
             SceneManager.GetActiveScene().name
