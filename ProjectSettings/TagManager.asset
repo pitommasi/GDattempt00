@@ -41,5 +41,29 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Far View
+    uniqueID: 2811213023
+    locked: 0
+  - name: Distant Background
+    uniqueID: 2540560273
+    locked: 0
+  - name: 'Back Wall '
+    uniqueID: 1757125079
+    locked: 0
+  - name: Rear Decoration
+    uniqueID: 2733892431
+    locked: 0
+  - name: Gameplay
+    uniqueID: 3330149721
+    locked: 0
+  - name: Front Decoration
+    uniqueID: 2332670933
+    locked: 0
+  - name: Near Foreground
+    uniqueID: 899070835
+    locked: 0
+  - name: Tutorial
+    uniqueID: 3045967207
+    locked: 0
   m_RenderingLayers:
   - Default
