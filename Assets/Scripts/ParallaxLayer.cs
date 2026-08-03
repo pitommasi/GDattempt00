@@ -21,8 +21,8 @@ public class ParallaxLayer : MonoBehaviour {
     private void Awake() {
         if (player == null) {
             Debug.LogError(
-                "ParallaxLayer requires the player's Transform!",
-                this
+                $"ParallaxLayer on '{gameObject.name}' requires the player's Transform!",
+                gameObject
             );
 
             enabled = false;
