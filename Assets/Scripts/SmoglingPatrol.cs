@@ -5,6 +5,7 @@ using UnityEngine;
 public class SmoglingPatrol : MonoBehaviour {
     [Header("Facing")]
     [SerializeField] private bool artworkFacesRight = true;
+    [SerializeField] private bool startMovingRight = true;
 
     [Header("Patrol limits")]
     [SerializeField] private Transform leftPoint;
@@ -16,12 +17,14 @@ public class SmoglingPatrol : MonoBehaviour {
     private Rigidbody2D body;
     private SpriteRenderer spriteRenderer;
     private Vector3 originalScale;
-    private int direction = 1;
+    private int direction;
 
     private void Awake() {
         body = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalScale = transform.localScale;
+        
+        direction = startMovingRight ? 1 : -1;
     }
     
     private void Start() {
