@@ -12027,6 +12027,7 @@ GameObject:
   - component: {fileID: 807611738}
   - component: {fileID: 807611737}
   - component: {fileID: 807611736}
+  - component: {fileID: 807611739}
   m_Layer: 5
   m_Name: Lives
   m_TagString: Untagged
@@ -12095,7 +12096,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.54901963, g: 0, b: 0, a: 0.19607843}
+  m_Color: {r: 0.54901963, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -12120,6 +12121,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 807611734}
   m_CullTransparentMesh: 1
+--- !u!114 &807611739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807611734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6d2ea582e52fe241b859c4ac6b7e8a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LivesHUD
+  playerHealth: {fileID: 1826094486}
+  lifeIcons:
+  - {fileID: 739806138}
+  - {fileID: 1325008250}
+  - {fileID: 2069829366}
 --- !u!1 &810564106
 GameObject:
   m_ObjectHideFlags: 0
@@ -31473,10 +31491,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   startingLives: 3
+  maximumLives: 3
   respawnPoint: {fileID: 646089275}
   respawnDelaySeconds: 0.4
   invulnerabilitySeconds: 1.2
   gameOverDelaySeconds: 1
+  flashIntervalSeconds: 0.1
+  gameOverUI: {fileID: 0}
   movementController: {fileID: 1826094485}
   playerRenderer: {fileID: 935060426}
 --- !u!1 &1830793869
