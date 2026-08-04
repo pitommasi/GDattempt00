@@ -1496,7 +1496,7 @@ GameObject:
   m_Component:
   - component: {fileID: 98182803}
   m_Layer: 0
-  m_Name: PostSmogling_LeftPoint
+  m_Name: SafeSmogling_LeftPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4536,7 +4536,7 @@ GameObject:
   - component: {fileID: 379122069}
   - component: {fileID: 379122068}
   m_Layer: 0
-  m_Name: PostSmogling_Visual
+  m_Name: SafeSmogling_Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9596,6 +9596,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SmoglingCombat
   playerBounceSpeed: 7
+  deathVisual: {fileID: 379122067}
+  deathRenderer: {fileID: 1839662470}
+  deathEffectSeconds: 0.5
+  finalHorizontalScale: 1.35
+  finalVerticalScale: 0.05
+  playerDeathSound: {fileID: 8300000, guid: 5c47297fd40c67f4a8b31c7c49b609a0, type: 3}
+  smoglingDeathSound: {fileID: 8300000, guid: ec31eb13353824449b66a5406c9e3be7, type: 3}
+  soundVolume: 1
   patrol: {fileID: 379122068}
   damageCollider: {fileID: 833215917}
   stompZone: {fileID: 1241345790}
@@ -10756,8 +10764,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 546.43317, y: -40.700012}
-  m_SizeDelta: {x: -1128.7664, y: 90.89}
+  m_AnchoredPosition: {x: 536.7466, y: -40.700012}
+  m_SizeDelta: {x: -1109.4, y: 90.89}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &726762304
 MonoBehaviour:
@@ -12057,7 +12065,7 @@ GameObject:
   m_Component:
   - component: {fileID: 775404760}
   m_Layer: 0
-  m_Name: PostSmogling_RightPoint
+  m_Name: SafeSmogling_RightPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12953,6 +12961,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SmoglingCombat
   playerBounceSpeed: 7
+  deathVisual: {fileID: 1419635029}
+  deathRenderer: {fileID: 543022761}
+  deathEffectSeconds: 0.5
+  finalHorizontalScale: 1.35
+  finalVerticalScale: 0.05
+  playerDeathSound: {fileID: 8300000, guid: 54ee6cf2bd732cd4d86d2a7bbfbec026, type: 3}
+  smoglingDeathSound: {fileID: 8300000, guid: ec31eb13353824449b66a5406c9e3be7, type: 3}
+  soundVolume: 1
   patrol: {fileID: 1419635034}
   damageCollider: {fileID: 532845656}
   stompZone: {fileID: 817743443}
@@ -34346,6 +34362,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SmoglingCombat
   playerBounceSpeed: 7
+  deathVisual: {fileID: 1681540753}
+  deathRenderer: {fileID: 148817858}
+  deathEffectSeconds: 0.5
+  finalHorizontalScale: 1.35
+  finalVerticalScale: 0.05
+  playerDeathSound: {fileID: 8300000, guid: d7959f00b22d8c74e9b4a04455350d23, type: 3}
+  smoglingDeathSound: {fileID: 8300000, guid: ec31eb13353824449b66a5406c9e3be7, type: 3}
+  soundVolume: 1
   patrol: {fileID: 368081358}
   damageCollider: {fileID: 1312078954}
   stompZone: {fileID: 45077123}
