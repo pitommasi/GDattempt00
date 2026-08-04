@@ -113,14 +113,14 @@ public class InputDebugger : MonoBehaviour {
         float totalSpeed = velocity.magnitude;
         bool isGrounded = CheckIsGrounded();
 
-        Debug.Log(
-            "Status | Move: " + moveInput +
-            " | Horizontal input: " + moveInput.x.ToString("F2") +
-            " | Speed X: " + horizontalSpeed.ToString("F2") +
-            " | Total Speed: " + totalSpeed.ToString("F2") +
-            " | Velocity: " + velocity +
-            " | IsGrounded: " + isGrounded
-        );
+        // Debug.Log(
+        //     "Status | Move: " + moveInput +
+        //     " | Horizontal input: " + moveInput.x.ToString("F2") +
+        //     " | Speed X: " + horizontalSpeed.ToString("F2") +
+        //     " | Total Speed: " + totalSpeed.ToString("F2") +
+        //     " | Velocity: " + velocity +
+        //     " | IsGrounded: " + isGrounded
+        // );
     }
 
     private bool CheckIsGrounded() {
