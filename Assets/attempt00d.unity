@@ -759,6 +759,7 @@ GameObject:
   m_Component:
   - component: {fileID: 45077122}
   - component: {fileID: 45077123}
+  - component: {fileID: 45077124}
   m_Layer: 0
   m_Name: StompZone
   m_TagString: Untagged
@@ -774,8 +775,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 45077121}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.416, y: 2.687, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.41600037, y: 2.687, z: 0}
   m_LocalScale: {x: 2.36375, y: 0.2003933, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -811,7 +812,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -827,6 +828,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &45077124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45077121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99dfdceefe50861408a498119a89da7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SmoglingStompZone
+  minimumDownwardSpeed: 0.1
+  smogling: {fileID: 1970925794}
 --- !u!1 &56167605
 GameObject:
   m_ObjectHideFlags: 0
@@ -2358,7 +2373,7 @@ GameObject:
   m_Component:
   - component: {fileID: 163446925}
   m_Layer: 0
-  m_Name: PostSmogling_LeftPoint
+  m_Name: BikeSmogling_LeftPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2373,7 +2388,7 @@ Transform:
   m_GameObject: {fileID: 163446924}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.375, y: -1.27564, z: 0}
+  m_LocalPosition: {x: -13, y: -1.27564, z: 0}
   m_LocalScale: {x: 12, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3118,6 +3133,97 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &246467009
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 246467010}
+  - component: {fileID: 246467011}
+  m_Layer: 6
+  m_Name: LargeVaseRSGlow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &246467010
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 246467009}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.002, y: 2.03, z: 0}
+  m_LocalScale: {x: 1.4247446, y: 3.9415252, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1575256088}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &246467011
+SpriteRenderer:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 246467009}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: -964817575
+  m_SortingLayer: 5
+  m_SortingOrder: 100
+  m_MaskInteraction: 0
+  m_Sprite: {fileID: 21300000, guid: 55bc0782cfb45d547b08a5b8f0af99ee, type: 3}
+  m_Color: {r: 0.21703434, g: 1, b: 0, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 1
+  m_Size: {x: 1.9428921, y: 0.16172297}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_SpriteSortPoint: 0
 --- !u!1 &260880851
 GameObject:
   m_ObjectHideFlags: 0
@@ -4048,7 +4154,7 @@ GameObject:
   - component: {fileID: 368081359}
   - component: {fileID: 368081358}
   m_Layer: 0
-  m_Name: PostSmogling_Visual
+  m_Name: BikeSmogling_Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4069,6 +4175,7 @@ Transform:
   m_Children:
   - {fileID: 1312078953}
   - {fileID: 45077122}
+  - {fileID: 1681540753}
   m_Father: {fileID: 1970925793}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &368081358
@@ -4145,7 +4252,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 368081356}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -7014,6 +7121,7 @@ GameObject:
   m_Component:
   - component: {fileID: 532845655}
   - component: {fileID: 532845656}
+  - component: {fileID: 532845657}
   m_Layer: 0
   m_Name: DamageCollider
   m_TagString: Untagged
@@ -7108,6 +7216,19 @@ PolygonCollider2D:
       - {x: 1.1982198, y: 0.1139009}
       - {x: 1.2010565, y: 0.30901712}
   m_UseDelaunayMesh: 1
+--- !u!114 &532845657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532845654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8f8c063832692340889113431635e92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SmoglingDamageZone
+  smogling: {fileID: 828341071}
 --- !u!1 &533134173
 GameObject:
   m_ObjectHideFlags: 0
@@ -9254,6 +9375,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 661795420}
+  - component: {fileID: 661795422}
+  - component: {fileID: 661795421}
   m_Layer: 0
   m_Name: SafeSmogling
   m_TagString: Untagged
@@ -9279,6 +9402,49 @@ Transform:
   - {fileID: 775404760}
   m_Father: {fileID: 322766358}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &661795421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661795419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7924373b127135e4dad9ab7c744327fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SmoglingCombat
+  playerBounceSpeed: 7
+  patrol: {fileID: 379122068}
+  damageCollider: {fileID: 833215917}
+  stompZone: {fileID: 1241345790}
+--- !u!50 &661795422
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661795419}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &663110084
 GameObject:
   m_ObjectHideFlags: 0
@@ -12146,6 +12312,7 @@ GameObject:
   m_Component:
   - component: {fileID: 817743442}
   - component: {fileID: 817743443}
+  - component: {fileID: 817743444}
   m_Layer: 0
   m_Name: StompZone
   m_TagString: Untagged
@@ -12198,7 +12365,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -12214,6 +12381,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &817743444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 817743441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99dfdceefe50861408a498119a89da7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SmoglingStompZone
+  minimumDownwardSpeed: 0.1
+  smogling: {fileID: 828341071}
 --- !u!1 &819315942
 GameObject:
   m_ObjectHideFlags: 0
@@ -12469,6 +12650,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 828341070}
+  - component: {fileID: 828341072}
+  - component: {fileID: 828341071}
   m_Layer: 0
   m_Name: PostSmogling
   m_TagString: Untagged
@@ -12494,6 +12677,49 @@ Transform:
   - {fileID: 1986616413}
   m_Father: {fileID: 322766358}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &828341071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828341069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7924373b127135e4dad9ab7c744327fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SmoglingCombat
+  playerBounceSpeed: 7
+  patrol: {fileID: 1419635034}
+  damageCollider: {fileID: 532845656}
+  stompZone: {fileID: 817743443}
+--- !u!50 &828341072
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828341069}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &833215915
 GameObject:
   m_ObjectHideFlags: 0
@@ -12504,6 +12730,7 @@ GameObject:
   m_Component:
   - component: {fileID: 833215916}
   - component: {fileID: 833215917}
+  - component: {fileID: 833215918}
   m_Layer: 0
   m_Name: DamageCollider
   m_TagString: Untagged
@@ -12598,6 +12825,19 @@ PolygonCollider2D:
       - {x: 1.1982198, y: 0.1139009}
       - {x: 1.2010565, y: 0.30901712}
   m_UseDelaunayMesh: 1
+--- !u!114 &833215918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833215915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8f8c063832692340889113431635e92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SmoglingDamageZone
+  smogling: {fileID: 661795421}
 --- !u!1 &836074595
 GameObject:
   m_ObjectHideFlags: 0
@@ -17634,8 +17874,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -964817575
-  m_SortingLayer: 5
+  m_SortingLayerID: -1962296363
+  m_SortingLayer: 6
   m_SortingOrder: 100
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: e0a3acf5a070a2e41ba68c26dc5641e9, type: 3}
@@ -19752,6 +19992,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1241345789}
   - component: {fileID: 1241345790}
+  - component: {fileID: 1241345791}
   m_Layer: 0
   m_Name: StompZone
   m_TagString: Untagged
@@ -19804,7 +20045,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -19820,6 +20061,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1241345791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241345788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99dfdceefe50861408a498119a89da7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SmoglingStompZone
+  minimumDownwardSpeed: 0.1
+  smogling: {fileID: 661795421}
 --- !u!1 &1242971678
 GameObject:
   m_ObjectHideFlags: 0
@@ -21597,6 +21852,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1312078953}
   - component: {fileID: 1312078954}
+  - component: {fileID: 1312078955}
   m_Layer: 0
   m_Name: DamageCollider
   m_TagString: Untagged
@@ -21612,7 +21868,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1312078952}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -21691,6 +21947,19 @@ PolygonCollider2D:
       - {x: 1.1982198, y: 0.1139009}
       - {x: 1.2010565, y: 0.30901712}
   m_UseDelaunayMesh: 1
+--- !u!114 &1312078955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312078952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8f8c063832692340889113431635e92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SmoglingDamageZone
+  smogling: {fileID: 1970925794}
 --- !u!1 &1313601558
 GameObject:
   m_ObjectHideFlags: 0
@@ -25818,7 +26087,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1549275480}
   m_Layer: 0
-  m_Name: PostSmogling_RightPoint
+  m_Name: BikeSmogling_RightPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26437,6 +26706,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1575256088}
   - component: {fileID: 1575256089}
+  - component: {fileID: 1575256090}
   m_Layer: 0
   m_Name: barrel
   m_TagString: Untagged
@@ -26453,10 +26723,11 @@ Transform:
   m_GameObject: {fileID: 1575256087}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 71.5258, y: 1.1958, z: 0}
-  m_LocalScale: {x: 1.1750588, y: 1.0816706, z: 1.1770083}
+  m_LocalPosition: {x: 72.101265, y: 1.0083, z: 0}
+  m_LocalScale: {x: 0.90686214, y: 0.8601295, z: 1.1770083}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 246467010}
   m_Father: {fileID: 1443963948}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1575256089
@@ -26518,6 +26789,52 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!61 &1575256090
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575256087}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.33, y: 3.95}
+    newSize: {x: 2.33, y: 3.95}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 2.33, y: 3.95}
+  m_EdgeRadius: 0
 --- !u!1 &1580894901
 GameObject:
   m_ObjectHideFlags: 0
@@ -28180,6 +28497,130 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1681540752
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1681540753}
+  - component: {fileID: 1681540755}
+  - component: {fileID: 1681540754}
+  - component: {fileID: 1681540756}
+  m_Layer: 0
+  m_Name: BikeSmogling_Display
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1681540753
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681540752}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 368081357}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1681540754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681540752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a439616026eedfe409d742d5a913e61a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimatedSpriteCopy
+  animatedSource: {fileID: 368081361}
+--- !u!212 &1681540755
+SpriteRenderer:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681540752}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: -964817575
+  m_SortingLayer: 5
+  m_SortingOrder: 130
+  m_MaskInteraction: 0
+  m_Sprite: {fileID: 3370105217581640048, guid: 832b01146eed3d84e8ea70a17302b521, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 1
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 3.64, y: 2.73}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_SpriteSortPoint: 0
+--- !u!114 &1681540756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681540752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 785f939ec01641b42a6dfee152488451, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SmoglingSizeShift
+  minimumScaleMultiplier: 0.85
+  maximumScaleMultiplier: 1.2
+  minimumPauseSeconds: 0.6
+  maximumPauseSeconds: 1.2
+  minimumTransitionSeconds: 0.25
+  maximumTransitionSeconds: 0.45
 --- !u!1 &1685167438
 GameObject:
   m_ObjectHideFlags: 0
@@ -30934,7 +31375,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!70 &1826094483
 CapsuleCollider2D:
@@ -33343,6 +33784,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1970925793}
+  - component: {fileID: 1970925795}
+  - component: {fileID: 1970925794}
   m_Layer: 0
   m_Name: BikeSmogling
   m_TagString: Untagged
@@ -33368,6 +33811,49 @@ Transform:
   - {fileID: 1549275480}
   m_Father: {fileID: 322766358}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1970925794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1970925792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7924373b127135e4dad9ab7c744327fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SmoglingCombat
+  playerBounceSpeed: 7
+  patrol: {fileID: 368081358}
+  damageCollider: {fileID: 1312078954}
+  stompZone: {fileID: 45077123}
+--- !u!50 &1970925795
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1970925792}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1972309595
 GameObject:
   m_ObjectHideFlags: 0
