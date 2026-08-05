@@ -88,6 +88,7 @@ public abstract class InteractableBase : MonoBehaviour {
         _playerInRange = player;
 
         SetPromptVisible(_promptEnabled);
+        OnPlayerEnteredRange(player);
     }
 
     private void OnTriggerExit2D(Collider2D other) {
@@ -101,11 +102,22 @@ public abstract class InteractableBase : MonoBehaviour {
         _playerInRange = null;
 
         SetPromptVisible(false);
+        OnPlayerExitedRange(player);
     }
 
     protected abstract void Interact(
         PlayerHealth player
     );
+
+    protected virtual void OnPlayerEnteredRange(
+        PlayerHealth player
+    ) {
+    }
+
+    protected virtual void OnPlayerExitedRange(
+        PlayerHealth player
+    ) {
+    }
 
     protected void DisableInteractionPrompt() {
         _promptEnabled = false;
@@ -114,10 +126,16 @@ public abstract class InteractableBase : MonoBehaviour {
     }
 
     protected void DisableInteraction() {
+        PlayerHealth player = _playerInRange;
+
         _interactionEnabled = false;
         _playerInRange = null;
 
         DisableInteractionPrompt();
+
+        if (player != null) {
+            OnPlayerExitedRange(player);
+        }
     }
 
     private void SetPromptVisible(bool visible) {
