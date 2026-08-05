@@ -16,7 +16,7 @@ public class SmoglingPostInteraction : InteractableBase {
             return;
         }
 
-        DisableInteraction();
+        DisableInteractionPrompt();
         _manifestPanel.Open();
 
         Debug.Log(
