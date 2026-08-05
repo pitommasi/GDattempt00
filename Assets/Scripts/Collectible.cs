@@ -15,6 +15,9 @@ public class Collectible : MonoBehaviour {
     [Min(1)]
     [SerializeField] private int _amount = 1;
 
+    [Header("Key")]
+    [SerializeField] private PlayerInventory.KeyType _keyType;
+
     [Header("Audio")]
     [SerializeField] private AudioClip _pickupSound;
 
@@ -47,7 +50,13 @@ public class Collectible : MonoBehaviour {
             return;
         }
 
-        bool effectApplied = TryApplyEffect(playerHealth);
+        PlayerInventory playerInventory =
+            other.GetComponentInParent<PlayerInventory>();
+
+        bool effectApplied = TryApplyEffect(
+            playerHealth,
+            playerInventory
+        );
 
         if (!effectApplied) {
             return;
@@ -56,13 +65,7 @@ public class Collectible : MonoBehaviour {
         _collected = true;
         _pickupCollider.enabled = false;
 
-        if (_pickupSound != null) {
-            AudioSource.PlayClipAtPoint(
-                _pickupSound,
-                transform.position,
-                _pickupVolume
-            );
-        }
+        PlayPickupSound();
 
         Debug.Log(
             $"Collected {_collectibleType}. Amount: {_amount}",
@@ -72,33 +75,35 @@ public class Collectible : MonoBehaviour {
         Destroy(gameObject);
     }
 
-    private bool TryApplyEffect(PlayerHealth playerHealth) {
+    private bool TryApplyEffect(
+        PlayerHealth playerHealth,
+        PlayerInventory playerInventory
+    ) {
+        if (_collectibleType == CollectibleType.Life) {
+            return TryAddLives(playerHealth);
+        }
+
+        if (playerInventory == null) {
+            Debug.LogError(
+                $"{name}: the player needs a PlayerInventory component.",
+                this
+            );
+
+            return false;
+        }
+
         switch (_collectibleType) {
             case CollectibleType.Key:
-                Debug.Log(
-                    $"Key collected. Amount: {_amount}",
-                    this
+                return playerInventory.TryCollectKey(
+                    _keyType
                 );
-
-                return true;
-
-            case CollectibleType.Life:
-                return TryAddLives(playerHealth);
 
             case CollectibleType.Cog:
-                Debug.Log(
-                    $"Cog collected. Amount: {_amount}",
-                    this
-                );
-
+                playerInventory.AddCogs(_amount);
                 return true;
 
             case CollectibleType.Tank:
-                Debug.Log(
-                    $"Tank collected. Amount: {_amount}",
-                    this
-                );
-
+                playerInventory.AddFuelTanks(_amount);
                 return true;
 
             default:
@@ -111,7 +116,9 @@ public class Collectible : MonoBehaviour {
         }
     }
 
-    private bool TryAddLives(PlayerHealth playerHealth) {
+    private bool TryAddLives(
+        PlayerHealth playerHealth
+    ) {
         bool addedAtLeastOneLife = false;
 
         for (int index = 0; index < _amount; index++) {
@@ -123,5 +130,17 @@ public class Collectible : MonoBehaviour {
         }
 
         return addedAtLeastOneLife;
+    }
+
+    private void PlayPickupSound() {
+        if (_pickupSound == null) {
+            return;
+        }
+
+        AudioSource.PlayClipAtPoint(
+            _pickupSound,
+            transform.position,
+            _pickupVolume
+        );
     }
 }
