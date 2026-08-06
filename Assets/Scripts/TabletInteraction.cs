@@ -1,8 +1,11 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
 public class TabletInteraction : InteractableBase {
+    private const float _easterEggBubbleDuration = 3f;
+
     [Header("Safe code")]
     [SerializeField] private SafeCode _safeCode;
 
@@ -17,6 +20,7 @@ public class TabletInteraction : InteractableBase {
     [SerializeField] private AudioClip _codeDiscoveredSound;
 
     private AudioSource _audioSource;
+    private bool _easterEggReactionPending;
 
     protected override void Awake() {
         base.Awake();
@@ -51,6 +55,9 @@ public class TabletInteraction : InteractableBase {
     ) {
         DisableInteractionPrompt();
 
+        StopAllCoroutines();
+        SetEasterEggBubbleVisible(false);
+
         bool codeDiscoveredNow =
             _safeCode.Discover();
 
@@ -59,16 +66,38 @@ public class TabletInteraction : InteractableBase {
 
         SetCodePanelVisible(true);
 
-        if (codeDiscoveredNow) {
-            PlayDiscoverySound();
-            ShowEasterEggReactionIfNeeded();
+        if (!codeDiscoveredNow) {
+            return;
         }
+
+        PlayDiscoverySound();
+
+        _easterEggReactionPending =
+            _safeCode.CurrentCode ==
+            SafeCode.EasterEggCode;
     }
 
     protected override void OnPlayerExitedRange(
         PlayerHealth player
     ) {
         SetCodePanelVisible(false);
+
+        if (_easterEggReactionPending) {
+            StartCoroutine(
+                ShowQueuedEasterEggReaction()
+            );
+        }
+    }
+
+    private IEnumerator ShowQueuedEasterEggReaction() {
+        _easterEggReactionPending = false;
+
+        SetEasterEggBubbleVisible(true);
+
+        yield return new WaitForSecondsRealtime(
+            _easterEggBubbleDuration
+        );
+
         SetEasterEggBubbleVisible(false);
     }
 
@@ -84,15 +113,6 @@ public class TabletInteraction : InteractableBase {
         }
     }
 
-    private void ShowEasterEggReactionIfNeeded() {
-        if (
-            _safeCode.CurrentCode ==
-            SafeCode.EasterEggCode
-        ) {
-            SetEasterEggBubbleVisible(true);
-        }
-    }
-
     private void SetCodePanelVisible(bool visible) {
         if (_codePanel != null) {
             _codePanel.SetActive(visible);
@@ -105,5 +125,12 @@ public class TabletInteraction : InteractableBase {
         if (_easterEggBubble != null) {
             _easterEggBubble.SetActive(visible);
         }
+    }
+
+    private void OnDisable() {
+        StopAllCoroutines();
+
+        SetCodePanelVisible(false);
+        SetEasterEggBubbleVisible(false);
     }
 }
