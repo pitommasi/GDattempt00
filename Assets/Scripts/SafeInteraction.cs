@@ -39,7 +39,8 @@ public class SafeInteraction : InteractableBase {
     protected override void Interact(
         PlayerHealth player
     ) {
-        DisableInteractionPrompt();
+        // Hide the current prompt while entering the code,
+        // but keep it enabled for later attempts.
         SetSafeBubblesVisible(false);
 
         _codePanelUI.Open(
@@ -51,6 +52,8 @@ public class SafeInteraction : InteractableBase {
     protected override void OnPlayerEnteredRange(
         PlayerHealth player
     ) {
+        SetSafeBubblesVisible(false);
+
         if (_safeCode.HasBeenDiscovered) {
             _knownCodeText.text =
                 FormatCode(_safeCode.CurrentCode);
