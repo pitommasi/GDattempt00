@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class TabletInteraction : InteractableBase {
     [Header("Safe code")]
     [SerializeField] private SafeCode _safeCode;
@@ -12,10 +13,15 @@ public class TabletInteraction : InteractableBase {
     [Header("0451 reaction")]
     [SerializeField] private GameObject _easterEggBubble;
 
-    private bool _easterEggReactionShown;
+    [Header("Audio")]
+    [SerializeField] private AudioClip _codeDiscoveredSound;
+
+    private AudioSource _audioSource;
 
     protected override void Awake() {
         base.Awake();
+
+        _audioSource = GetComponent<AudioSource>();
 
         SetCodePanelVisible(false);
         SetEasterEggBubbleVisible(false);
@@ -45,11 +51,18 @@ public class TabletInteraction : InteractableBase {
     ) {
         DisableInteractionPrompt();
 
-        _safeCode.Discover();
-        _codeText.text = FormatCode(_safeCode.CurrentCode);
+        bool codeDiscoveredNow =
+            _safeCode.Discover();
+
+        _codeText.text =
+            FormatCode(_safeCode.CurrentCode);
 
         SetCodePanelVisible(true);
-        ShowEasterEggReactionIfNeeded();
+
+        if (codeDiscoveredNow) {
+            PlayDiscoverySound();
+            ShowEasterEggReactionIfNeeded();
+        }
     }
 
     protected override void OnPlayerExitedRange(
@@ -63,16 +76,21 @@ public class TabletInteraction : InteractableBase {
         return $"{code[0]} {code[1]} {code[2]} {code[3]}";
     }
 
+    private void PlayDiscoverySound() {
+        if (_codeDiscoveredSound != null) {
+            _audioSource.PlayOneShot(
+                _codeDiscoveredSound
+            );
+        }
+    }
+
     private void ShowEasterEggReactionIfNeeded() {
         if (
-            _easterEggReactionShown ||
-            _safeCode.CurrentCode != SafeCode.EasterEggCode
+            _safeCode.CurrentCode ==
+            SafeCode.EasterEggCode
         ) {
-            return;
+            SetEasterEggBubbleVisible(true);
         }
-
-        _easterEggReactionShown = true;
-        SetEasterEggBubbleVisible(true);
     }
 
     private void SetCodePanelVisible(bool visible) {

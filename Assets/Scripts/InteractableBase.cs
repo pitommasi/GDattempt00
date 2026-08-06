@@ -119,6 +119,17 @@ public abstract class InteractableBase : MonoBehaviour {
     ) {
     }
 
+    protected void SetInteractionPrompt(
+        GameObject interactionPrompt
+    ) {
+        SetPromptVisible(false);
+        _interactionPrompt = interactionPrompt;
+    }
+
+    protected void ShowInteractionPrompt() {
+        SetPromptVisible(_promptEnabled);
+    }
+
     protected void DisableInteractionPrompt() {
         _promptEnabled = false;
 

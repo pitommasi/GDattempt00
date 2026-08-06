@@ -6,6 +6,11 @@ public class SafeCode : MonoBehaviour {
     private const int _minimumCode = 0;
     private const int _maximumCodeExclusive = 10000;
 
+#if UNITY_EDITOR
+    [Header("Testing")]
+    [SerializeField] private bool _force0451ForTesting;
+#endif
+
     private string _currentCode;
     private bool _hasBeenDiscovered;
 
@@ -16,11 +21,24 @@ public class SafeCode : MonoBehaviour {
         GenerateCode();
     }
 
-    public void Discover() {
+    public bool Discover() {
+        if (_hasBeenDiscovered) {
+            return false;
+        }
+
         _hasBeenDiscovered = true;
+
+        return true;
     }
 
     private void GenerateCode() {
+#if UNITY_EDITOR
+        if (_force0451ForTesting) {
+            _currentCode = EasterEggCode;
+            return;
+        }
+#endif
+
         int generatedNumber = Random.Range(
             _minimumCode,
             _maximumCodeExclusive
