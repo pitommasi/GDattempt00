@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour {
+    public const int RequiredCogCount = 3;
+    public const int RequiredFuelTankCount = 3;
+
     public enum KeyType {
         Warehouse,
         RepairShop,
@@ -22,6 +25,10 @@ public class PlayerInventory : MonoBehaviour {
 
     public int CogCount => _cogCount;
     public int FuelTankCount => _fuelTankCount;
+
+    public bool HasAllMotorcycleParts =>
+        _cogCount >= RequiredCogCount &&
+        _fuelTankCount >= RequiredFuelTankCount;
 
     public void AddCogs(int amount) {
         _cogCount += Mathf.Max(1, amount);
