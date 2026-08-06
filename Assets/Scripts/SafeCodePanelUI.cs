@@ -32,6 +32,7 @@ public class SafeCodePanelUI : MonoBehaviour {
     private Action _correctCodeEntered;
 
     private string _enteredCode = string.Empty;
+    private string _defaultFeedbackText;
 
     private float _timeScaleBeforeOpening;
     private bool _panelOpen;
@@ -56,6 +57,9 @@ public class SafeCodePanelUI : MonoBehaviour {
             enabled = false;
             return;
         }
+
+        _defaultFeedbackText =
+            _feedbackText.text;
 
         ResetForNewAttempt();
     }
@@ -131,10 +135,6 @@ public class SafeCodePanelUI : MonoBehaviour {
             return;
         }
 
-        if (_enteredCode.Length == 0) {
-            _feedbackText.text = string.Empty;
-        }
-
         _enteredCode += digit.ToString();
 
         RefreshDigits();
@@ -153,8 +153,6 @@ public class SafeCodePanelUI : MonoBehaviour {
             0,
             _enteredCode.Length - 1
         );
-
-        _feedbackText.text = string.Empty;
 
         RefreshDigits();
     }
@@ -195,10 +193,12 @@ public class SafeCodePanelUI : MonoBehaviour {
         RefreshDigits();
         _digitsText.color = _wrongColour;
 
-        _feedbackText.text =
-            attemptedCode == SafeCode.EasterEggCode
-                ? "Nice try!\nWrong place."
-                : string.Empty;
+        if (attemptedCode == SafeCode.EasterEggCode) {
+            _feedbackText.text =
+                "Nice try!\nWrong place.";
+        } else {
+            RestoreDefaultFeedback();
+        }
 
         PlaySound(_wrongCodeSound);
 
@@ -225,6 +225,7 @@ public class SafeCodePanelUI : MonoBehaviour {
         _digitsText.color = _normalColour;
         _acceptingInput = true;
 
+        RestoreDefaultFeedback();
         RefreshDigits();
     }
 
@@ -237,11 +238,15 @@ public class SafeCodePanelUI : MonoBehaviour {
             _digitsText.color = _normalColour;
         }
 
-        if (_feedbackText != null) {
-            _feedbackText.text = string.Empty;
-        }
-
+        RestoreDefaultFeedback();
         RefreshDigits();
+    }
+
+    private void RestoreDefaultFeedback() {
+        if (_feedbackText != null) {
+            _feedbackText.text =
+                _defaultFeedbackText;
+        }
     }
 
     private void RefreshDigits() {
