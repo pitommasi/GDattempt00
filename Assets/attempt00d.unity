@@ -2020,7 +2020,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &136279207
 Transform:
   m_ObjectHideFlags: 0
@@ -2703,7 +2703,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16269c250a39e644499c91470d31dc6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SafeCode
-  _force0451ForTesting: 0
+  _force0451ForTesting: 1
 --- !u!1 &175494557
 GameObject:
   m_ObjectHideFlags: 0
@@ -10045,7 +10045,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.030912519, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -10055,7 +10055,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 5, y: 1}
+  m_Size: {x: 5.061825, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &632001093
 MonoBehaviour:
@@ -21216,7 +21216,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 13.522301, y: -0.09987879}
+  m_Offset: {x: 13.36166, y: -0.09987879}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -21226,7 +21226,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.9329977, y: 11.752336}
+  m_Size: {x: 1.254281, y: 11.752336}
   m_EdgeRadius: 0
 --- !u!114 &1205374995
 MonoBehaviour:
