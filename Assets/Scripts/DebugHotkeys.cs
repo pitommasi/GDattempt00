@@ -62,7 +62,7 @@ public class DebugHotkeys : MonoBehaviour {
         }
 
         if (
-            Keyboard.current.hKey
+            Keyboard.current.cKey
                 .wasPressedThisFrame
         ) {
             TeleportTo(
