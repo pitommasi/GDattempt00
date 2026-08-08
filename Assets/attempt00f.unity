@@ -1187,8 +1187,8 @@ Transform:
   m_GameObject: {fileID: 72183828}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.70612085, w: 0.70809126}
-  m_LocalPosition: {x: -95.88579, y: -6.5199175, z: 0}
-  m_LocalScale: {x: 1.3885441, y: 1.3788365, z: 1.2288}
+  m_LocalPosition: {x: -95.8224, y: -6.4846, z: 0}
+  m_LocalScale: {x: 1.5732205, y: 1.5622218, z: 1.3922305}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1590888816}
@@ -1892,8 +1892,8 @@ Transform:
   m_GameObject: {fileID: 128831089}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -85.44835, y: 5.0841746, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -85.45518, y: 5.026091, z: 0}
+  m_LocalScale: {x: 0.9625, y: 0.96415496, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -7153,8 +7153,8 @@ RectTransform:
   - {fileID: 1906194575}
   - {fileID: 2084271908}
   - {fileID: 1025884118}
-  - {fileID: 34922338}
   - {fileID: 1284210565}
+  - {fileID: 34922338}
   - {fileID: 1841690608}
   - {fileID: 338489211}
   m_Father: {fileID: 0}
@@ -8866,7 +8866,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 538344692}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -10907,7 +10907,7 @@ Transform:
   m_GameObject: {fileID: 651982845}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -63.783836, y: 2.082951, z: 0}
+  m_LocalPosition: {x: -63.783836, y: 1.984951, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -23428,7 +23428,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1263391203}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -24022,7 +24022,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.0627451, g: 0.07450981, b: 0.12156863, a: 0.8627451}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8627451}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -26788,7 +26788,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.29433048, y: -6.9999995}
+  m_Offset: {x: -1.2056693, y: -6.9999995}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -26798,7 +26798,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.4114387, y: 14.999999}
+  m_Size: {x: 3.4114382, y: 14.999999}
   m_EdgeRadius: 0
 --- !u!1 &1355473678
 GameObject:
@@ -26885,8 +26885,8 @@ Transform:
   m_GameObject: {fileID: 1355473678}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -88.13311, y: 5.0841746, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -88.13994, y: 5.026091, z: 0}
+  m_LocalScale: {x: 0.9625, y: 0.96415496, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -30145,7 +30145,7 @@ Transform:
   m_GameObject: {fileID: 1551784919}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -74.91389, y: 5.9335446, z: 0}
+  m_LocalPosition: {x: -74.91389, y: 5.891, z: 0}
   m_LocalScale: {x: 0.56485415, y: 0.57051253, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -31650,7 +31650,7 @@ Transform:
   m_GameObject: {fileID: 1629758157}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -86.39306, y: 5.090909, z: 0}
+  m_LocalPosition: {x: -86.406, y: 5.065, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -36285,7 +36285,7 @@ MonoBehaviour:
   maximumLives: 3
   respawnPoint: {fileID: 646089275}
   respawnDelaySeconds: 0.4
-  invulnerabilitySeconds: 5
+  invulnerabilitySeconds: 2
   gameOverDelaySeconds: 1
   flashIntervalSeconds: 0.2
   gameOverUI: {fileID: 1532111463}
@@ -37443,8 +37443,8 @@ Transform:
   m_GameObject: {fileID: 1877565674}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -60.155308, y: 3.0014174, z: 0}
-  m_LocalScale: {x: 0.3845023, y: 0.46503356, z: 1}
+  m_LocalPosition: {x: -60.155308, y: 2.93, z: 0}
+  m_LocalScale: {x: 0.3845023, y: 0.4766594, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -40635,7 +40635,7 @@ Transform:
   m_GameObject: {fileID: 2059287917}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -55.84, y: 5.828, z: 0}
+  m_LocalPosition: {x: -55.84, y: 5.73, z: 0}
   m_LocalScale: {x: 6.38, y: 0.06537317, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -40847,8 +40847,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4282566134
-  m_fontColor: {r: 0.9647059, g: 0.77254903, b: 0.25882354, a: 1}
+    rgba: 4278210412
+  m_fontColor: {r: 0.4245283, g: 0.3089623, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -40871,7 +40871,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -41359,7 +41359,7 @@ Transform:
   m_GameObject: {fileID: 2076800177}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -68.7571, y: 3.14504, z: 0}
+  m_LocalPosition: {x: -68.7571, y: 3.04704, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -43158,7 +43158,7 @@ Transform:
   m_GameObject: {fileID: 2138708841}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -60.460625, y: 3.0639174, z: 0}
+  m_LocalPosition: {x: -60.460625, y: 2.96, z: 0}
   m_LocalScale: {x: 0.43183097, y: 0.493195, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
