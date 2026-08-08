@@ -7749,6 +7749,8 @@ MonoBehaviour:
   _requiredKeyBubble: {fileID: 1629865608}
   _blockingCollider: {fileID: 1205374993}
   _facadeToReveal: {fileID: 1205374995}
+  _openingSound: {fileID: 8300000, guid: fe64ec5fb251f3c4594e55d019254872, type: 3}
+  _openingVolume: 0.892
 --- !u!1 &475674629
 GameObject:
   m_ObjectHideFlags: 0
@@ -10490,6 +10492,8 @@ MonoBehaviour:
   _requiredKeyBubble: {fileID: 1521197068}
   _blockingCollider: {fileID: 1205374994}
   _facadeToReveal: {fileID: 0}
+  _openingSound: {fileID: 8300000, guid: fe64ec5fb251f3c4594e55d019254872, type: 3}
+  _openingVolume: 0.892
 --- !u!1 &633078638
 GameObject:
   m_ObjectHideFlags: 0
@@ -13610,8 +13614,8 @@ Transform:
   m_GameObject: {fileID: 767326113}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -16.258795, y: 13.171845, z: 0}
-  m_LocalScale: {x: 5.0723796, y: 0.06537, z: 1}
+  m_LocalPosition: {x: -16.4242, y: 13.171845, z: 0}
+  m_LocalScale: {x: 4.7416606, y: 0.06537, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 775482783}
@@ -13904,7 +13908,7 @@ Transform:
   m_GameObject: {fileID: 775482782}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.002, y: -2.2816947, z: 0}
+  m_LocalPosition: {x: 0.0073, y: -2.2816947, z: 0}
   m_LocalScale: {x: 1.4247446, y: 10.279991, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13964,7 +13968,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 0.78039706, y: 0.97287905}
+  m_Size: {x: 0.7934592, y: 0.97287905}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -36261,7 +36265,7 @@ MonoBehaviour:
   _animator: {fileID: 935060427}
   _playerSpriteRenderer: {fileID: 935060426}
   _jumpSound: {fileID: 8300000, guid: f3f5e8d332c4f5d49a4ab37289448faf, type: 3}
-  _jumpVolume: 0.53
+  _jumpVolume: 0.486
   _footstepSound: {fileID: 8300000, guid: fd8b36f9f1b9c28468681ad98ba25c61, type: 3}
   _footstepVolume: 0.781
   _footstepInterval: 2.317
@@ -36988,6 +36992,8 @@ MonoBehaviour:
   _requiredKeyBubble: {fileID: 325822490}
   _blockingCollider: {fileID: 203947937}
   _facadeToReveal: {fileID: 203947938}
+  _openingSound: {fileID: 8300000, guid: fe64ec5fb251f3c4594e55d019254872, type: 3}
+  _openingVolume: 0.892
 --- !u!1 &1870465376
 GameObject:
   m_ObjectHideFlags: 0

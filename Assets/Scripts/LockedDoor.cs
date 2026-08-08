@@ -15,6 +15,14 @@ public class LockedDoor : InteractableBase {
     [SerializeField]
     private AreaFacade _facadeToReveal;
 
+    [Header("Audio")]
+    [SerializeField]
+    private AudioClip _openingSound;
+
+    [Range(0f, 1f)]
+    [SerializeField]
+    private float _openingVolume = 1f;
+
     protected override void Awake() {
         base.Awake();
 
@@ -74,6 +82,7 @@ public class LockedDoor : InteractableBase {
     }
 
     private void OpenDoor() {
+        PlayOpeningSound();
         DisableInteraction();
 
         _blockingCollider.enabled = false;
@@ -83,6 +92,25 @@ public class LockedDoor : InteractableBase {
         }
 
         gameObject.SetActive(false);
+    }
+
+    private void PlayOpeningSound() {
+        if (_openingSound == null) {
+            return;
+        }
+
+        GameObject soundObject =
+            new GameObject("Door opening sound");
+
+        AudioSource soundSource =
+            soundObject.AddComponent<AudioSource>();
+
+        soundSource.clip = _openingSound;
+        soundSource.volume = _openingVolume;
+        soundSource.spatialBlend = 0f;
+        soundSource.Play();
+
+        Destroy(soundObject, _openingSound.length);
     }
 
     private void SetRequiredKeyBubbleVisible(
