@@ -1,35 +1,70 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(AudioSource))]
 public class PlayerController2D : MonoBehaviour {
     [Header("Input Actions")]
-    [SerializeField] private string moveActionPath = "Player/Move";
-    [SerializeField] private string jumpActionPath = "Player/Jump";
+    [FormerlySerializedAs("moveActionPath")]
+    [SerializeField] private string _moveActionPath = "Player/Move";
+
+    [FormerlySerializedAs("jumpActionPath")]
+    [SerializeField] private string _jumpActionPath = "Player/Jump";
 
     [Header("Movement")]
-    [SerializeField] private float moveSpeed = 7f;
-    [SerializeField] private float jumpVelocity = 8.5f;
+    [FormerlySerializedAs("moveSpeed")]
+    [SerializeField] private float _moveSpeed = 7f;
+
+    [FormerlySerializedAs("jumpVelocity")]
+    [SerializeField] private float _jumpVelocity = 8.5f;
 
     [Header("Ground Check")]
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private float groundCheckRadius = 0.12f;
-    [SerializeField] private LayerMask groundLayer;
+    [FormerlySerializedAs("groundCheck")]
+    [SerializeField] private Transform _groundCheck;
+
+    [FormerlySerializedAs("groundCheckRadius")]
+    [SerializeField] private float _groundCheckRadius = 0.12f;
+
+    [FormerlySerializedAs("groundLayer")]
+    [SerializeField] private LayerMask _groundLayer;
 
     [Header("Animation")]
-    [SerializeField] private Animator animator;
-    [SerializeField] private SpriteRenderer playerSpriteRenderer;
+    [FormerlySerializedAs("animator")]
+    [SerializeField] private Animator _animator;
 
-    private Rigidbody2D rb;
-    private InputAction moveAction;
-    private InputAction jumpAction;
+    [FormerlySerializedAs("playerSpriteRenderer")]
+    [SerializeField] private SpriteRenderer _playerSpriteRenderer;
 
-    private float horizontalInput;
-    private bool jumpPressed;
-    private bool isGrounded;
+    [Header("Audio")]
+    [SerializeField] private AudioClip _jumpSound;
+
+    [Range(0f, 1f)]
+    [SerializeField] private float _jumpVolume = 1f;
+
+    [SerializeField] private AudioClip _footstepSound;
+
+    [Range(0f, 1f)]
+    [SerializeField] private float _footstepVolume = 1f;
+
+    [Min(0.05f)]
+    [SerializeField] private float _footstepInterval = 0.35f;
+
+    private Rigidbody2D _rigidbody;
+    private AudioSource _audioSource;
+    private InputAction _moveAction;
+    private InputAction _jumpAction;
+
+    private float _horizontalInput;
+    private float _footstepTimer;
+
+    private bool _jumpPressed;
+    private bool _isGrounded;
+    private bool _footstepSequenceActive;
 
     private void Awake() {
-        rb = GetComponent<Rigidbody2D>();
+        _rigidbody = GetComponent<Rigidbody2D>();
+        _audioSource = GetComponent<AudioSource>();
 
         if (InputSystem.actions == null) {
             Debug.LogError(
@@ -41,12 +76,19 @@ public class PlayerController2D : MonoBehaviour {
             return;
         }
 
-        moveAction = InputSystem.actions.FindAction(moveActionPath, throwIfNotFound: false);
-        jumpAction = InputSystem.actions.FindAction(jumpActionPath, throwIfNotFound: false);
+        _moveAction = InputSystem.actions.FindAction(
+            _moveActionPath,
+            throwIfNotFound: false
+        );
 
-        if (moveAction == null) {
+        _jumpAction = InputSystem.actions.FindAction(
+            _jumpActionPath,
+            throwIfNotFound: false
+        );
+
+        if (_moveAction == null) {
             Debug.LogError(
-                "PlayerController2D: input action not found: " + moveActionPath,
+                "PlayerController2D: input action not found: " + _moveActionPath,
                 this
             );
 
@@ -54,9 +96,9 @@ public class PlayerController2D : MonoBehaviour {
             return;
         }
 
-        if (jumpAction == null) {
+        if (_jumpAction == null) {
             Debug.LogError(
-                "PlayerController2D: input action not found: " + jumpActionPath,
+                "PlayerController2D: input action not found: " + _jumpActionPath,
                 this
             );
 
@@ -64,86 +106,155 @@ public class PlayerController2D : MonoBehaviour {
             return;
         }
 
-        if (!moveAction.enabled) {
-            moveAction.Enable();
+        if (!_moveAction.enabled) {
+            _moveAction.Enable();
         }
 
-        if (!jumpAction.enabled) {
-            jumpAction.Enable();
+        if (!_jumpAction.enabled) {
+            _jumpAction.Enable();
         }
     }
 
     private void Update() {
-        Vector2 moveInput = moveAction.ReadValue<Vector2>();
-        horizontalInput = moveInput.x;
+        Vector2 moveInput = _moveAction.ReadValue<Vector2>();
+        _horizontalInput = moveInput.x;
 
-        if (jumpAction.WasPressedThisFrame()) {
-            jumpPressed = true;
+        if (_jumpAction.WasPressedThisFrame()) {
+            _jumpPressed = true;
         }
 
         UpdateFacingDirection();
     }
 
     private void FixedUpdate() {
-        isGrounded = CheckIsGrounded();
+        _isGrounded = CheckIsGrounded();
 
-        rb.linearVelocity = new Vector2(
-            horizontalInput * moveSpeed,
-            rb.linearVelocity.y
-        );
+        ApplyHorizontalMovement();
+        TryJump();
+        UpdateFootsteps();
 
-        if (jumpPressed && isGrounded) {
-            rb.linearVelocity = new Vector2(
-                rb.linearVelocity.x,
-                jumpVelocity
-            );
-        }
-
-        jumpPressed = false;
+        _jumpPressed = false;
 
         UpdateAnimationParameters();
     }
 
+    private void ApplyHorizontalMovement() {
+        _rigidbody.linearVelocity = new Vector2(
+            _horizontalInput * _moveSpeed,
+            _rigidbody.linearVelocity.y
+        );
+    }
+
+    private void TryJump() {
+        if (!_jumpPressed || !_isGrounded) {
+            return;
+        }
+
+        StopFootsteps();
+
+        _rigidbody.linearVelocity = new Vector2(
+            _rigidbody.linearVelocity.x,
+            _jumpVelocity
+        );
+
+        _isGrounded = false;
+
+        PlaySound(_jumpSound, _jumpVolume);
+    }
+
+    private void UpdateFootsteps() {
+        bool shouldPlayFootsteps =
+            _isGrounded &&
+            _rigidbody.linearVelocity.y <= 0.01f &&
+            Mathf.Abs(_horizontalInput) > 0.01f;
+
+        if (!shouldPlayFootsteps) {
+            StopFootsteps();
+            return;
+        }
+
+        _footstepTimer -= Time.fixedDeltaTime;
+
+        if (_footstepTimer > 0f) {
+            return;
+        }
+
+        PlayFootsteps();
+        _footstepTimer = _footstepInterval;
+    }
+
+    private void PlayFootsteps() {
+        _footstepSequenceActive = PlaySound(
+            _footstepSound,
+            _footstepVolume
+        );
+    }
+
+    private void StopFootsteps() {
+        _footstepTimer = 0f;
+
+        if (!_footstepSequenceActive) {
+            return;
+        }
+
+        _audioSource.Stop();
+        _footstepSequenceActive = false;
+    }
+
+    private bool PlaySound(AudioClip sound, float volume) {
+        if (sound == null) {
+            return false;
+        }
+
+        _audioSource.PlayOneShot(sound, volume);
+        return true;
+    }
+
     private bool CheckIsGrounded() {
-        if (groundCheck == null) {
+        if (_groundCheck == null) {
             return false;
         }
 
         return Physics2D.OverlapCircle(
-            groundCheck.position,
-            groundCheckRadius,
-            groundLayer
+            _groundCheck.position,
+            _groundCheckRadius,
+            _groundLayer
         );
     }
 
     private void UpdateFacingDirection() {
-        if (playerSpriteRenderer == null) {
+        if (_playerSpriteRenderer == null) {
             return;
         }
 
-        if (horizontalInput > 0f) {
-            playerSpriteRenderer.flipX = false;
-        }
-        else if (horizontalInput < 0f) {
-            playerSpriteRenderer.flipX = true;
+        if (_horizontalInput > 0f) {
+            _playerSpriteRenderer.flipX = false;
+        } else if (_horizontalInput < 0f) {
+            _playerSpriteRenderer.flipX = true;
         }
     }
 
     private void UpdateAnimationParameters() {
-        if (animator == null) {
+        if (_animator == null) {
             return;
         }
 
-        animator.SetFloat("Speed", Mathf.Abs(horizontalInput));
-        animator.SetFloat("VerticalVelocity", rb.linearVelocity.y);
-        animator.SetBool("IsGrounded", isGrounded);
+        _animator.SetFloat("Speed", Mathf.Abs(_horizontalInput));
+        _animator.SetFloat(
+            "VerticalVelocity",
+            _rigidbody.linearVelocity.y
+        );
+        _animator.SetBool("IsGrounded", _isGrounded);
     }
 
     private void OnDrawGizmosSelected() {
-        if (groundCheck == null) {
+        if (_groundCheck == null) {
             return;
         }
 
-        Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+        Gizmos.DrawWireSphere(
+            _groundCheck.position,
+            _groundCheckRadius
+        );
     }
 }
