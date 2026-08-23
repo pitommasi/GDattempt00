@@ -65,25 +65,13 @@ public class SafeCodePanelUI : MonoBehaviour {
     }
 
     private void Update() {
-        if (!_panelOpen) {
+        if (!_panelOpen || !_acceptingInput) {
             return;
         }
 
         Keyboard keyboard = Keyboard.current;
 
         if (keyboard == null) {
-            return;
-        }
-
-        if (
-            !_codeAccepted &&
-            keyboard.escapeKey.wasPressedThisFrame
-        ) {
-            Close();
-            return;
-        }
-
-        if (!_acceptingInput) {
             return;
         }
 
@@ -122,7 +110,7 @@ public class SafeCodePanelUI : MonoBehaviour {
     }
 
     public void Close() {
-        if (!_panelOpen) {
+        if (!_panelOpen || _codeAccepted) {
             return;
         }
 

@@ -1,12 +1,20 @@
 using UnityEngine;
 
 public class LockedDoor : InteractableBase {
+    private static int _tutorialSceneHandle = -1;
+    private static LockedDoor _tutorialDoor;
+    private static bool _tutorialCompleted;
+
     [Header("Required key")]
     [SerializeField]
     private PlayerInventory.KeyType _requiredKey;
 
     [SerializeField]
     private GameObject _requiredKeyBubble;
+
+    [Header("First-door tutorial")]
+    [SerializeField]
+    private bool _canStartInteractionTutorial;
 
     [Header("Opening")]
     [SerializeField]
@@ -26,6 +34,7 @@ public class LockedDoor : InteractableBase {
     protected override void Awake() {
         base.Awake();
 
+        ResetTutorialForNewScene();
         SetRequiredKeyBubbleVisible(false);
 
         if (_requiredKeyBubble == null) {
@@ -48,9 +57,17 @@ public class LockedDoor : InteractableBase {
         }
     }
 
+    protected override void OnPlayerEnteredRange(
+        PlayerHealth player
+    ) {
+        ConfigureInteractionTutorial();
+    }
+
     protected override void Interact(
         PlayerHealth player
     ) {
+        CompleteInteractionTutorial();
+
         PlayerInventory playerInventory =
             player.GetComponent<PlayerInventory>();
 
@@ -79,6 +96,49 @@ public class LockedDoor : InteractableBase {
         PlayerHealth player
     ) {
         SetRequiredKeyBubbleVisible(false);
+    }
+
+    private void ResetTutorialForNewScene() {
+        int currentSceneHandle = gameObject.scene.handle;
+
+        if (_tutorialSceneHandle == currentSceneHandle) {
+            return;
+        }
+
+        _tutorialSceneHandle = currentSceneHandle;
+        _tutorialDoor = null;
+        _tutorialCompleted = false;
+    }
+
+    private void ConfigureInteractionTutorial() {
+        if (
+            !_canStartInteractionTutorial ||
+            _tutorialCompleted
+        ) {
+            DisableInteractionPrompt();
+            return;
+        }
+
+        if (_tutorialDoor == null) {
+            _tutorialDoor = this;
+        }
+
+        if (_tutorialDoor != this) {
+            DisableInteractionPrompt();
+        }
+    }
+
+    private void CompleteInteractionTutorial() {
+        if (
+            !_canStartInteractionTutorial ||
+            _tutorialCompleted ||
+            _tutorialDoor != this
+        ) {
+            return;
+        }
+
+        _tutorialCompleted = true;
+        DisableInteractionPrompt();
     }
 
     private void OpenDoor() {
