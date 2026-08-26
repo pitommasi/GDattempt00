@@ -53,31 +53,19 @@ public class CollectiblesHUD : MonoBehaviour {
 
     private bool HasRequiredReferences() {
         if (_playerInventory == null) {
-            Debug.LogError(
-                $"{name}: assign the Player Inventory.",
-                this
-            );
+            Debug.LogError($"{name}: assign the Player Inventory.", this);
 
             return false;
         }
 
         if (_collectiblesBackground == null) {
-            Debug.LogError(
-                $"{name}: assign the Collectibles Background.",
-                this
-            );
+            Debug.LogError($"{name}: assign the Collectibles Background.", this);
 
             return false;
         }
 
-        if (
-            _fuelTankIcons.Length == 0 ||
-            _fuelTankIcons[_fuelTankIcons.Length - 1] == null
-        ) {
-            Debug.LogError(
-                $"{name}: assign the fuel tank icons from left to right.",
-                this
-            );
+        if (_fuelTankIcons.Length == 0 || _fuelTankIcons[_fuelTankIcons.Length - 1] == null) {
+            Debug.LogError($"{name}: assign the fuel tank icons from left to right.", this);
 
             return false;
         }
@@ -86,85 +74,51 @@ public class CollectiblesHUD : MonoBehaviour {
     }
 
     private void RememberCollapsedBackgroundSize() {
-        RectTransform lastFuelTank =
-            _fuelTankIcons[_fuelTankIcons.Length - 1].rectTransform;
+        RectTransform lastFuelTank = _fuelTankIcons[_fuelTankIcons.Length - 1].rectTransform;
 
-        _collapsedBackgroundWidth =
-            _collectiblesBackground.rect.width;
+        _collapsedBackgroundWidth = _collectiblesBackground.rect.width;
 
-        _collapsedBackgroundRight =
-            GetRightEdge(_collectiblesBackground);
+        _collapsedBackgroundRight = GetRightEdge(_collectiblesBackground);
 
-        _backgroundRightPadding =
-            _collapsedBackgroundRight -
-            GetRightEdge(lastFuelTank);
+        _backgroundRightPadding = _collapsedBackgroundRight - GetRightEdge(lastFuelTank);
 
         _backgroundSizeReady = true;
     }
 
     private void RefreshHUD() {
-        UpdateProgressIcons(
-            _cogIcons,
-            _playerInventory.CogCount
-        );
+        UpdateProgressIcons(_cogIcons, _playerInventory.CogCount);
 
-        UpdateProgressIcons(
-            _fuelTankIcons,
-            _playerInventory.FuelTankCount
-        );
+        UpdateProgressIcons(_fuelTankIcons, _playerInventory.FuelTankCount);
 
-        UpdateKeyIcon(
-            _warehouseKeyIcon,
-            PlayerInventory.KeyType.Warehouse
-        );
+        UpdateKeyIcon(_warehouseKeyIcon, PlayerInventory.KeyType.Warehouse);
 
-        UpdateKeyIcon(
-            _repairShopKeyIcon,
-            PlayerInventory.KeyType.RepairShop
-        );
+        UpdateKeyIcon(_repairShopKeyIcon, PlayerInventory.KeyType.RepairShop);
 
-        UpdateKeyIcon(
-            _backyardKeyIcon,
-            PlayerInventory.KeyType.Backyard
-        );
+        UpdateKeyIcon(_backyardKeyIcon, PlayerInventory.KeyType.Backyard);
 
         UpdateBackgroundWidth();
     }
 
-    private void UpdateProgressIcons(
-        Image[] icons,
-        int collectedAmount
-    ) {
+    private void UpdateProgressIcons(Image[] icons, int collectedAmount) {
         for (int index = 0; index < icons.Length; index++) {
             float targetAlpha = index < collectedAmount
                 ? _collectedAlpha
                 : _discoveredAlpha;
 
-            SetIconAlpha(
-                icons[index],
-                targetAlpha
-            );
+            SetIconAlpha(icons[index], targetAlpha);
         }
     }
 
-    private void UpdateKeyIcon(
-        Image icon,
-        PlayerInventory.KeyType keyType
-    ) {
+    private void UpdateKeyIcon(Image icon, PlayerInventory.KeyType keyType) {
         float targetAlpha = _hiddenAlpha;
 
         if (_playerInventory.HasKey(keyType)) {
             targetAlpha = _collectedAlpha;
-        } else if (
-            _playerInventory.IsKeyRequirementRevealed(keyType)
-        ) {
+        } else if (_playerInventory.IsKeyRequirementRevealed(keyType)) {
             targetAlpha = _discoveredAlpha;
         }
 
-        SetIconAlpha(
-            icon,
-            targetAlpha
-        );
+        SetIconAlpha(icon, targetAlpha);
     }
 
     private void UpdateBackgroundWidth() {
@@ -174,28 +128,13 @@ public class CollectiblesHUD : MonoBehaviour {
 
         float targetRight = _collapsedBackgroundRight;
 
-        targetRight = IncludeVisibleKey(
-            targetRight,
-            _warehouseKeyIcon,
-            PlayerInventory.KeyType.Warehouse
-        );
+        targetRight = IncludeVisibleKey(targetRight, _warehouseKeyIcon, PlayerInventory.KeyType.Warehouse);
 
-        targetRight = IncludeVisibleKey(
-            targetRight,
-            _repairShopKeyIcon,
-            PlayerInventory.KeyType.RepairShop
-        );
+        targetRight = IncludeVisibleKey(targetRight, _repairShopKeyIcon, PlayerInventory.KeyType.RepairShop);
 
-        targetRight = IncludeVisibleKey(
-            targetRight,
-            _backyardKeyIcon,
-            PlayerInventory.KeyType.Backyard
-        );
+        targetRight = IncludeVisibleKey(targetRight, _backyardKeyIcon, PlayerInventory.KeyType.Backyard);
 
-        float addedWidth = Mathf.Max(
-            0f,
-            targetRight - _collapsedBackgroundRight
-        );
+        float addedWidth = Mathf.Max(0f, targetRight - _collapsedBackgroundRight);
 
         _collectiblesBackground.SetSizeWithCurrentAnchors(
             RectTransform.Axis.Horizontal,
@@ -203,46 +142,28 @@ public class CollectiblesHUD : MonoBehaviour {
         );
     }
 
-    private float IncludeVisibleKey(
-        float currentRight,
-        Image icon,
-        PlayerInventory.KeyType keyType
-    ) {
+    private float IncludeVisibleKey(float currentRight, Image icon, PlayerInventory.KeyType keyType) {
         if (icon == null || !IsKeyVisible(keyType)) {
             return currentRight;
         }
 
-        float keyRight =
-            GetRightEdge(icon.rectTransform) +
-            _backgroundRightPadding;
+        float keyRight = GetRightEdge(icon.rectTransform) + _backgroundRightPadding;
 
         return Mathf.Max(currentRight, keyRight);
     }
 
-    private bool IsKeyVisible(
-        PlayerInventory.KeyType keyType
-    ) {
-        return
-            _playerInventory.HasKey(keyType) ||
-            _playerInventory.IsKeyRequirementRevealed(keyType);
+    private bool IsKeyVisible(PlayerInventory.KeyType keyType) {
+        return _playerInventory.HasKey(keyType) || _playerInventory.IsKeyRequirementRevealed(keyType);
     }
 
-    private float GetRightEdge(
-        RectTransform rectTransform
-    ) {
+    private float GetRightEdge(RectTransform rectTransform) {
         Bounds bounds =
-            RectTransformUtility.CalculateRelativeRectTransformBounds(
-                _collectiblesBackground.parent,
-                rectTransform
-            );
+            RectTransformUtility.CalculateRelativeRectTransformBounds(_collectiblesBackground.parent, rectTransform);
 
         return bounds.max.x;
     }
 
-    private void SetIconAlpha(
-        Image icon,
-        float alpha
-    ) {
+    private void SetIconAlpha(Image icon, float alpha) {
         if (icon == null) {
             return;
         }

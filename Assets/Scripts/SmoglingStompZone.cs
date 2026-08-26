@@ -15,10 +15,7 @@ public class SmoglingStompZone : MonoBehaviour {
         stompCollider = GetComponent<Collider2D>();
 
         if (!stompCollider.isTrigger) {
-            Debug.LogWarning(
-                $"{name}: enable Is Trigger on the Stomp Zone collider.",
-                this
-            );
+            Debug.LogWarning($"{name}: enable Is Trigger on the Stomp Zone collider.", this);
         }
 
         if (smogling == null) {
@@ -26,10 +23,7 @@ public class SmoglingStompZone : MonoBehaviour {
         }
 
         if (smogling == null) {
-            Debug.LogError(
-                $"{name}: no SmoglingCombat component was found.",
-                this
-            );
+            Debug.LogError($"{name}: no SmoglingCombat component was found.", this);
 
             enabled = false;
         }
@@ -40,24 +34,19 @@ public class SmoglingStompZone : MonoBehaviour {
             return;
         }
 
-        PlayerHealth player =
-            other.GetComponentInParent<PlayerHealth>();
+        PlayerHealth player = other.GetComponentInParent<PlayerHealth>();
 
         if (player == null || player.DamageSequenceRunning) {
             return;
         }
 
-        Rigidbody2D playerBody =
-            player.GetComponent<Rigidbody2D>();
+        Rigidbody2D playerBody = player.GetComponent<Rigidbody2D>();
 
         if (playerBody == null) {
             return;
         }
 
-        if (
-            playerBody.linearVelocity.y >
-            -minimumDownwardSpeed
-        ) {
+        if (playerBody.linearVelocity.y > -minimumDownwardSpeed) {
             return;
         }
 

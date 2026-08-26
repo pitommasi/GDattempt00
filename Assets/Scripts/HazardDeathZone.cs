@@ -17,16 +17,12 @@ public class HazardDeathZone : MonoBehaviour {
         audioSource = GetComponent<AudioSource>();
 
         if (!triggerCollider.isTrigger) {
-            Debug.LogWarning(
-                $"{name}: the Collider 2D should have Is Trigger enabled.",
-                this
-            );
+            Debug.LogWarning($"{name}: the Collider 2D should have Is Trigger enabled.", this);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        PlayerHealth player =
-            other.GetComponentInParent<PlayerHealth>();
+        PlayerHealth player = other.GetComponentInParent<PlayerHealth>();
 
         if (player == null) {
             return;
@@ -39,18 +35,11 @@ public class HazardDeathZone : MonoBehaviour {
         float delayBeforeRespawn = -1f;
 
         if (deathSound != null) {
-            audioSource.PlayOneShot(
-                deathSound,
-                soundVolume
-            );
+            audioSource.PlayOneShot(deathSound, soundVolume);
 
-            float playbackPitch = Mathf.Max(
-                0.01f,
-                Mathf.Abs(audioSource.pitch)
-            );
+            float playbackPitch = Mathf.Max(0.01f, Mathf.Abs(audioSource.pitch));
 
-            delayBeforeRespawn =
-                deathSound.length / playbackPitch;
+            delayBeforeRespawn = deathSound.length / playbackPitch;
         }
 
         player.TakeDamage(delayBeforeRespawn);

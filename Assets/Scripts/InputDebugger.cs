@@ -47,20 +47,14 @@ public class InputDebugger : MonoBehaviour {
         jumpAction = InputSystem.actions.FindAction(jumpActionPath, throwIfNotFound: false);
 
         if (moveAction == null) {
-            Debug.LogError(
-                "InputDebugger: input action not found: " + moveActionPath,
-                this
-            );
+            Debug.LogError("InputDebugger: input action not found: " + moveActionPath, this);
 
             enabled = false;
             return;
         }
 
         if (jumpAction == null) {
-            Debug.LogError(
-                "InputDebugger: input action not found: " + jumpActionPath,
-                this
-            );
+            Debug.LogError("InputDebugger: input action not found: " + jumpActionPath, this);
 
             enabled = false;
             return;
@@ -90,15 +84,11 @@ public class InputDebugger : MonoBehaviour {
         }
 
         if (logJumpEvents && jumpAction.WasPressedThisFrame()) {
-            Debug.Log(
-                "Jump pressed | Active control: " + GetActiveControlName(jumpAction)
-            );
+            Debug.Log("Jump pressed | Active control: " + GetActiveControlName(jumpAction));
         }
 
         if (logJumpEvents && jumpAction.WasReleasedThisFrame()) {
-            Debug.Log(
-                "Jump released | Active control: " + GetActiveControlName(jumpAction)
-            );
+            Debug.Log("Jump released | Active control: " + GetActiveControlName(jumpAction));
         }
 
         if (logRepeatedStatus && Time.time >= nextLogTime) {
@@ -128,11 +118,7 @@ public class InputDebugger : MonoBehaviour {
             return false;
         }
 
-        return Physics2D.OverlapCircle(
-            groundCheck.position,
-            groundCheckRadius,
-            groundLayer
-        );
+        return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
     }
 
     private string GetActiveControlName(InputAction action) {

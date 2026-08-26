@@ -61,43 +61,27 @@ public class PlayerHealth : MonoBehaviour {
     private void Start() {
         maximumLives = Mathf.Max(1, maximumLives);
 
-        _currentLives = Mathf.Clamp(
-            startingLives,
-            1,
-            maximumLives
-        );
+        _currentLives = Mathf.Clamp(startingLives, 1, maximumLives);
 
         if (respawnPoint == null) {
-            Debug.LogError(
-                $"{name}: PlayerHealth needs a Respawn Point.",
-                this
-            );
+            Debug.LogError($"{name}: PlayerHealth needs a Respawn Point.", this);
 
             enabled = false;
             return;
         }
 
         if (gameOverUI == null) {
-            Debug.LogWarning(
-                $"{name}: no Game Over UI has been assigned.",
-                this
-            );
+            Debug.LogWarning($"{name}: no Game Over UI has been assigned.", this);
         }
 
         LivesChanged?.Invoke(_currentLives);
 
-        Debug.Log(
-            $"{name}: starting with {_currentLives} lives.",
-            this
-        );
+        Debug.Log($"{name}: starting with {_currentLives} lives.", this);
     }
 
     public bool TryAddLife() {
         if (_currentLives >= maximumLives) {
-            Debug.Log(
-                $"{name}: extra life ignored because lives are full.",
-                this
-            );
+            Debug.Log($"{name}: extra life ignored because lives are full.", this);
 
             return false;
         }
@@ -105,10 +89,7 @@ public class PlayerHealth : MonoBehaviour {
         _currentLives++;
         LivesChanged?.Invoke(_currentLives);
 
-        Debug.Log(
-            $"{name}: extra life collected. Lives: {_currentLives}",
-            this
-        );
+        Debug.Log($"{name}: extra life collected. Lives: {_currentLives}", this);
 
         return true;
     }
@@ -121,10 +102,7 @@ public class PlayerHealth : MonoBehaviour {
         _currentLives = Mathf.Max(0, _currentLives - 1);
         LivesChanged?.Invoke(_currentLives);
 
-        Debug.LogWarning(
-            $"PLAYER DEATH | Lives remaining: {_currentLives}",
-            this
-        );
+        Debug.LogWarning($"PLAYER DEATH | Lives remaining: {_currentLives}", this);
 
         if (_currentLives <= 0) {
             float gameOverDelay = delayOverrideSeconds >= 0f
@@ -146,15 +124,10 @@ public class PlayerHealth : MonoBehaviour {
             return;
         }
 
-        _body.linearVelocity = new Vector2(
-            _body.linearVelocity.x,
-            bounceSpeed
-        );
+        _body.linearVelocity = new Vector2(_body.linearVelocity.x, bounceSpeed);
     }
 
-    private IEnumerator RespawnRoutine(
-        float delayBeforeRespawn
-    ) {
+    private IEnumerator RespawnRoutine(float delayBeforeRespawn) {
         _damageSequenceRunning = true;
 
         SetPlayerActive(false);
@@ -171,17 +144,11 @@ public class PlayerHealth : MonoBehaviour {
     }
 
     private IEnumerator FlashRoutine() {
-        if (
-            playerRenderer == null ||
-            invulnerabilitySeconds <= 0f
-        ) {
+        if (playerRenderer == null || invulnerabilitySeconds <= 0f) {
             yield break;
         }
 
-        float flashInterval = Mathf.Max(
-            0.02f,
-            flashIntervalSeconds
-        );
+        float flashInterval = Mathf.Max(0.02f, flashIntervalSeconds);
 
         float elapsedSeconds = 0f;
 
@@ -196,9 +163,7 @@ public class PlayerHealth : MonoBehaviour {
         playerRenderer.enabled = true;
     }
 
-    private IEnumerator GameOverRoutine(
-        float delayBeforeGameOver
-    ) {
+    private IEnumerator GameOverRoutine(float delayBeforeGameOver) {
         _damageSequenceRunning = true;
 
         Debug.Log($"{name}: GAME OVER.", this);
@@ -211,16 +176,11 @@ public class PlayerHealth : MonoBehaviour {
             gameOverUI.Show();
         }
 
-        while (
-            Keyboard.current == null ||
-            !Keyboard.current.spaceKey.wasPressedThisFrame
-        ) {
+        while (Keyboard.current == null || !Keyboard.current.spaceKey.wasPressedThisFrame) {
             yield return null;
         }
 
-        SceneManager.LoadScene(
-            SceneManager.GetActiveScene().name
-        );
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void SetPlayerActive(bool active) {

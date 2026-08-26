@@ -39,10 +39,7 @@ public class SafeCode : MonoBehaviour {
         }
 #endif
 
-        int generatedNumber = Random.Range(
-            _minimumCode,
-            _maximumCodeExclusive
-        );
+        int generatedNumber = Random.Range(_minimumCode, _maximumCodeExclusive);
 
         _currentCode = generatedNumber.ToString("D4");
     }

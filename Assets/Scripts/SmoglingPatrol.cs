@@ -29,20 +29,14 @@ public class SmoglingPatrol : MonoBehaviour {
     
     private void Start() {
         if (leftPoint == null || rightPoint == null) {
-            Debug.LogError(
-                $"{name}: assign both patrol points in the Inspector.",
-                this
-            );
+            Debug.LogError($"{name}: assign both patrol points in the Inspector.", this);
 
             enabled = false;
             return;
         }
 
         if (leftPoint.position.x > rightPoint.position.x) {
-            Debug.LogError(
-                $"{name}: Left Point must be to the left of Right Point.",
-                this
-            );
+            Debug.LogError($"{name}: Left Point must be to the left of Right Point.", this);
 
             enabled = false;
         }
@@ -59,11 +53,7 @@ public class SmoglingPatrol : MonoBehaviour {
 
         float scaleSign = shouldMirror ? -1f : 1f;
 
-        transform.localScale = new Vector3(
-            Mathf.Abs(originalScale.x) * scaleSign,
-            originalScale.y,
-            originalScale.z
-        );
+        transform.localScale = new Vector3(Mathf.Abs(originalScale.x) * scaleSign, originalScale.y, originalScale.z);
 
         spriteRenderer.flipX = false;
     }
@@ -75,10 +65,7 @@ public class SmoglingPatrol : MonoBehaviour {
             direction = 1;
         }
 
-        body.linearVelocity = new Vector2(
-            direction * moveSpeed,
-            body.linearVelocity.y
-        );
+        body.linearVelocity = new Vector2(direction * moveSpeed, body.linearVelocity.y);
 
         UpdateFacing();
     }

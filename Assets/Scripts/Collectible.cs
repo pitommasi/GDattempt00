@@ -31,10 +31,7 @@ public class Collectible : MonoBehaviour {
         _pickupCollider = GetComponent<Collider2D>();
 
         if (!_pickupCollider.isTrigger) {
-            Debug.LogWarning(
-                $"{name}: enable Is Trigger on the collectible collider.",
-                this
-            );
+            Debug.LogWarning($"{name}: enable Is Trigger on the collectible collider.", this);
         }
     }
 
@@ -43,20 +40,15 @@ public class Collectible : MonoBehaviour {
             return;
         }
 
-        PlayerHealth playerHealth =
-            other.GetComponentInParent<PlayerHealth>();
+        PlayerHealth playerHealth = other.GetComponentInParent<PlayerHealth>();
 
         if (playerHealth == null) {
             return;
         }
 
-        PlayerInventory playerInventory =
-            other.GetComponentInParent<PlayerInventory>();
+        PlayerInventory playerInventory = other.GetComponentInParent<PlayerInventory>();
 
-        bool effectApplied = TryApplyEffect(
-            playerHealth,
-            playerInventory
-        );
+        bool effectApplied = TryApplyEffect(playerHealth, playerInventory);
 
         if (!effectApplied) {
             return;
@@ -67,36 +59,25 @@ public class Collectible : MonoBehaviour {
 
         PlayPickupSound();
 
-        Debug.Log(
-            $"Collected {_collectibleType}. Amount: {_amount}",
-            this
-        );
+        Debug.Log($"Collected {_collectibleType}. Amount: {_amount}", this);
 
         Destroy(gameObject);
     }
 
-    private bool TryApplyEffect(
-        PlayerHealth playerHealth,
-        PlayerInventory playerInventory
-    ) {
+    private bool TryApplyEffect(PlayerHealth playerHealth, PlayerInventory playerInventory) {
         if (_collectibleType == CollectibleType.Life) {
             return TryAddLives(playerHealth);
         }
 
         if (playerInventory == null) {
-            Debug.LogError(
-                $"{name}: the player needs a PlayerInventory component.",
-                this
-            );
+            Debug.LogError($"{name}: the player needs a PlayerInventory component.", this);
 
             return false;
         }
 
         switch (_collectibleType) {
             case CollectibleType.Key:
-                return playerInventory.TryCollectKey(
-                    _keyType
-                );
+                return playerInventory.TryCollectKey(_keyType);
 
             case CollectibleType.Cog:
                 playerInventory.AddCogs(_amount);
@@ -107,18 +88,13 @@ public class Collectible : MonoBehaviour {
                 return true;
 
             default:
-                Debug.LogWarning(
-                    $"{name}: unsupported collectible type.",
-                    this
-                );
+                Debug.LogWarning($"{name}: unsupported collectible type.", this);
 
                 return false;
         }
     }
 
-    private bool TryAddLives(
-        PlayerHealth playerHealth
-    ) {
+    private bool TryAddLives(PlayerHealth playerHealth) {
         bool addedAtLeastOneLife = false;
 
         for (int index = 0; index < _amount; index++) {
@@ -137,10 +113,6 @@ public class Collectible : MonoBehaviour {
             return;
         }
 
-        AudioSource.PlayClipAtPoint(
-            _pickupSound,
-            transform.position,
-            _pickupVolume
-        );
+        AudioSource.PlayClipAtPoint(_pickupSound, transform.position, _pickupVolume);
     }
 }

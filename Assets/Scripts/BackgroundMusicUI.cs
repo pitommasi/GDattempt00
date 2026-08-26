@@ -15,10 +15,7 @@ public class BackgroundMusicUI : MonoBehaviour {
         _musicSource = GetComponent<AudioSource>();
 
         if (_buttonLabel == null) {
-            Debug.LogError(
-                $"{name}: assign the music button label.",
-                this
-            );
+            Debug.LogError($"{name}: assign the music button label.", this);
 
             enabled = false;
             return;
@@ -29,10 +26,7 @@ public class BackgroundMusicUI : MonoBehaviour {
     }
 
     private void Update() {
-        if (
-            _musicAction != null &&
-            _musicAction.WasPressedThisFrame()
-        ) {
+        if (_musicAction != null && _musicAction.WasPressedThisFrame()) {
             ToggleMusic();
         }
     }
@@ -48,24 +42,15 @@ public class BackgroundMusicUI : MonoBehaviour {
 
     private void FindMusicAction() {
         if (InputSystem.actions == null) {
-            Debug.LogError(
-                $"{name}: no project-wide Input Actions asset was found.",
-                this
-            );
+            Debug.LogError($"{name}: no project-wide Input Actions asset was found.", this);
 
             return;
         }
 
-        _musicAction = InputSystem.actions.FindAction(
-            MusicActionPath,
-            throwIfNotFound: false
-        );
+        _musicAction = InputSystem.actions.FindAction(MusicActionPath, throwIfNotFound: false);
 
         if (_musicAction == null) {
-            Debug.LogError(
-                $"{name}: {MusicActionPath} was not found in the project-wide Input Actions.",
-                this
-            );
+            Debug.LogError($"{name}: {MusicActionPath} was not found in the project-wide Input Actions.", this);
 
             return;
         }

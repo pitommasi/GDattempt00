@@ -6,16 +6,10 @@ public class AreaFacade : MonoBehaviour {
     private SpriteRenderer[] _facadeRenderers;
 
     private void Awake() {
-        _facadeRenderers =
-            GetComponentsInChildren<SpriteRenderer>(
-                includeInactive: true
-            );
+        _facadeRenderers = GetComponentsInChildren<SpriteRenderer>(includeInactive: true);
 
         if (_facadeRenderers.Length == 0) {
-            Debug.LogError(
-                $"{name}: no facade SpriteRenderers were found.",
-                this
-            );
+            Debug.LogError($"{name}: no facade SpriteRenderers were found.", this);
 
             enabled = false;
         }
@@ -27,17 +21,11 @@ public class AreaFacade : MonoBehaviour {
         }
 
         foreach (SpriteRenderer facadeRenderer in _facadeRenderers) {
-            SetRendererAlpha(
-                facadeRenderer,
-                _revealedAlpha
-            );
+            SetRendererAlpha(facadeRenderer, _revealedAlpha);
         }
     }
 
-    private void SetRendererAlpha(
-        SpriteRenderer facadeRenderer,
-        float alpha
-    ) {
+    private void SetRendererAlpha(SpriteRenderer facadeRenderer, float alpha) {
         if (facadeRenderer == null) {
             return;
         }

@@ -6,30 +6,21 @@ public class LockedDoor : InteractableBase {
     private static bool _tutorialCompleted;
 
     [Header("Required key")]
-    [SerializeField]
-    private PlayerInventory.KeyType _requiredKey;
-
-    [SerializeField]
-    private GameObject _requiredKeyBubble;
+    [SerializeField] private PlayerInventory.KeyType _requiredKey;
+    [SerializeField] private GameObject _requiredKeyBubble;
 
     [Header("First-door tutorial")]
-    [SerializeField]
-    private bool _canStartInteractionTutorial;
+    [SerializeField] private bool _canStartInteractionTutorial;
 
     [Header("Opening")]
-    [SerializeField]
-    private Collider2D _blockingCollider;
-
-    [SerializeField]
-    private AreaFacade _facadeToReveal;
+    [SerializeField] private Collider2D _blockingCollider;
+    [SerializeField] private AreaFacade _facadeToReveal;
 
     [Header("Audio")]
-    [SerializeField]
-    private AudioClip _openingSound;
+    [SerializeField] private AudioClip _openingSound;
 
     [Range(0f, 1f)]
-    [SerializeField]
-    private float _openingVolume = 1f;
+    [SerializeField] private float _openingVolume = 1f;
 
     protected override void Awake() {
         base.Awake();
@@ -38,52 +29,36 @@ public class LockedDoor : InteractableBase {
         SetRequiredKeyBubbleVisible(false);
 
         if (_requiredKeyBubble == null) {
-            Debug.LogError(
-                $"{name}: assign the required-key bubble.",
-                this
-            );
+            Debug.LogError($"{name}: assign the required-key bubble.", this);
 
             enabled = false;
             return;
         }
 
         if (_blockingCollider == null) {
-            Debug.LogError(
-                $"{name}: assign the doorway's blocking collider.",
-                this
-            );
+            Debug.LogError($"{name}: assign the doorway's blocking collider.", this);
 
             enabled = false;
         }
     }
 
-    protected override void OnPlayerEnteredRange(
-        PlayerHealth player
-    ) {
+    protected override void OnPlayerEnteredRange(PlayerHealth player) {
         ConfigureInteractionTutorial();
     }
 
-    protected override void Interact(
-        PlayerHealth player
-    ) {
+    protected override void Interact(PlayerHealth player) {
         CompleteInteractionTutorial();
 
-        PlayerInventory playerInventory =
-            player.GetComponent<PlayerInventory>();
+        PlayerInventory playerInventory = player.GetComponent<PlayerInventory>();
 
         if (playerInventory == null) {
-            Debug.LogError(
-                $"{name}: PlayerInventory was not found beside PlayerHealth.",
-                this
-            );
+            Debug.LogError($"{name}: PlayerInventory was not found beside PlayerHealth.", this);
 
             return;
         }
 
         if (!playerInventory.HasKey(_requiredKey)) {
-            playerInventory.RevealKeyRequirement(
-                _requiredKey
-            );
+            playerInventory.RevealKeyRequirement(_requiredKey);
 
             SetRequiredKeyBubbleVisible(true);
             return;
@@ -92,9 +67,7 @@ public class LockedDoor : InteractableBase {
         OpenDoor();
     }
 
-    protected override void OnPlayerExitedRange(
-        PlayerHealth player
-    ) {
+    protected override void OnPlayerExitedRange(PlayerHealth player) {
         SetRequiredKeyBubbleVisible(false);
     }
 
@@ -111,10 +84,7 @@ public class LockedDoor : InteractableBase {
     }
 
     private void ConfigureInteractionTutorial() {
-        if (
-            !_canStartInteractionTutorial ||
-            _tutorialCompleted
-        ) {
+        if (!_canStartInteractionTutorial || _tutorialCompleted) {
             DisableInteractionPrompt();
             return;
         }
@@ -129,11 +99,7 @@ public class LockedDoor : InteractableBase {
     }
 
     private void CompleteInteractionTutorial() {
-        if (
-            !_canStartInteractionTutorial ||
-            _tutorialCompleted ||
-            _tutorialDoor != this
-        ) {
+        if (!_canStartInteractionTutorial || _tutorialCompleted || _tutorialDoor != this) {
             return;
         }
 
@@ -159,11 +125,9 @@ public class LockedDoor : InteractableBase {
             return;
         }
 
-        GameObject soundObject =
-            new GameObject("Door opening sound");
+        GameObject soundObject = new GameObject("Door opening sound");
 
-        AudioSource soundSource =
-            soundObject.AddComponent<AudioSource>();
+        AudioSource soundSource = soundObject.AddComponent<AudioSource>();
 
         soundSource.clip = _openingSound;
         soundSource.volume = _openingVolume;
@@ -173,9 +137,7 @@ public class LockedDoor : InteractableBase {
         Destroy(soundObject, _openingSound.length);
     }
 
-    private void SetRequiredKeyBubbleVisible(
-        bool visible
-    ) {
+    private void SetRequiredKeyBubbleVisible(bool visible) {
         if (_requiredKeyBubble != null) {
             _requiredKeyBubble.SetActive(visible);
         }

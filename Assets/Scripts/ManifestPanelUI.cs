@@ -19,30 +19,18 @@ public class ManifestPanelUI : MonoBehaviour {
         SetPanelVisible(false);
 
         if (InputSystem.actions == null) {
-            Debug.LogError(
-                $"{name}: no project-wide Input Actions asset was found.",
-                this
-            );
+            Debug.LogError($"{name}: no project-wide Input Actions asset was found.", this);
 
             enabled = false;
             return;
         }
 
-        _interactAction = InputSystem.actions.FindAction(
-            _interactActionPath,
-            throwIfNotFound: false
-        );
+        _interactAction = InputSystem.actions.FindAction(_interactActionPath, throwIfNotFound: false);
 
-        _cancelAction = InputSystem.actions.FindAction(
-            _cancelActionPath,
-            throwIfNotFound: false
-        );
+        _cancelAction = InputSystem.actions.FindAction(_cancelActionPath, throwIfNotFound: false);
 
         if (_interactAction == null || _cancelAction == null) {
-            Debug.LogError(
-                $"{name}: the Interact or Cancel input action was not found.",
-                this
-            );
+            Debug.LogError($"{name}: the Interact or Cancel input action was not found.", this);
 
             enabled = false;
             return;
@@ -58,16 +46,11 @@ public class ManifestPanelUI : MonoBehaviour {
     }
 
     private void Update() {
-        if (
-            !_isOpen ||
-            Time.frameCount <= _openedFrame
-        ) {
+        if (!_isOpen || Time.frameCount <= _openedFrame) {
             return;
         }
 
-        bool closePressed =
-            _interactAction.WasPressedThisFrame() ||
-            _cancelAction.WasPressedThisFrame();
+        bool closePressed = _interactAction.WasPressedThisFrame() || _cancelAction.WasPressedThisFrame();
 
         if (closePressed) {
             Close();

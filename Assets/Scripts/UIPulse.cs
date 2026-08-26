@@ -13,10 +13,6 @@ public class UIPulse : MonoBehaviour {
     private void Update() {
         float pulse = 1f + Mathf.Sin(Time.time * pulseSpeed) * pulseAmount;
 
-        transform.localScale = new Vector3(
-            baseScale.x * pulse,
-            baseScale.y * pulse,
-            baseScale.z
-        );
+        transform.localScale = new Vector3(baseScale.x * pulse, baseScale.y * pulse, baseScale.z);
     }
 }

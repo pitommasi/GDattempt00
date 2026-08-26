@@ -14,10 +14,7 @@ public class SmoglingDamageZone : MonoBehaviour {
         }
 
         if (smogling == null) {
-            Debug.LogError(
-                $"{name}: no SmoglingCombat component was found.",
-                this
-            );
+            Debug.LogError($"{name}: no SmoglingCombat component was found.", this);
 
             enabled = false;
         }
@@ -28,8 +25,7 @@ public class SmoglingDamageZone : MonoBehaviour {
             return;
         }
 
-        PlayerHealth player =
-            collision.collider.GetComponentInParent<PlayerHealth>();
+        PlayerHealth player = collision.collider.GetComponentInParent<PlayerHealth>();
 
         if (player == null || player.DamageSequenceRunning) {
             return;

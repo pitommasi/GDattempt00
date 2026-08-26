@@ -9,14 +9,11 @@ public class SafeCodePanelUI : MonoBehaviour {
     private const int _codeLength = 4;
     private const float _feedbackDuration = 0.75f;
 
-    private static readonly Color _normalColour =
-        Color.white;
+    private static readonly Color _normalColour = Color.white;
 
-    private static readonly Color _wrongColour =
-        new Color(1f, 0.25f, 0.25f);
+    private static readonly Color _wrongColour = new Color(1f, 0.25f, 0.25f);
 
-    private static readonly Color _correctColour =
-        new Color(0.35f, 1f, 0.35f);
+    private static readonly Color _correctColour = new Color(0.35f, 1f, 0.35f);
 
     [Header("Safe code panel")]
     [SerializeField] private GameObject _panelRoot;
@@ -44,22 +41,14 @@ public class SafeCodePanelUI : MonoBehaviour {
 
         SetPanelVisible(false);
 
-        if (
-            _panelRoot == null ||
-            _digitsText == null ||
-            _feedbackText == null
-        ) {
-            Debug.LogError(
-                $"{name}: assign the safe code panel and both text fields.",
-                this
-            );
+        if (_panelRoot == null || _digitsText == null || _feedbackText == null) {
+            Debug.LogError($"{name}: assign the safe code panel and both text fields.", this);
 
             enabled = false;
             return;
         }
 
-        _defaultFeedbackText =
-            _feedbackText.text;
+        _defaultFeedbackText = _feedbackText.text;
 
         ResetForNewAttempt();
     }
@@ -87,10 +76,7 @@ public class SafeCodePanelUI : MonoBehaviour {
         }
     }
 
-    public void Open(
-        SafeCode safeCode,
-        Action correctCodeEntered
-    ) {
+    public void Open(SafeCode safeCode, Action correctCodeEntered) {
         if (!enabled || safeCode == null || _panelOpen) {
             return;
         }
@@ -137,10 +123,7 @@ public class SafeCodePanelUI : MonoBehaviour {
             return;
         }
 
-        _enteredCode = _enteredCode.Substring(
-            0,
-            _enteredCode.Length - 1
-        );
+        _enteredCode = _enteredCode.Substring(0, _enteredCode.Length - 1);
 
         RefreshDigits();
     }
@@ -159,9 +142,7 @@ public class SafeCodePanelUI : MonoBehaviour {
         _codeAccepted = true;
         _digitsText.color = _correctColour;
 
-        bool guessed0451WithoutKnowing =
-            _enteredCode == SafeCode.EasterEggCode &&
-            !_safeCode.HasBeenDiscovered;
+        bool guessed0451WithoutKnowing = _enteredCode == SafeCode.EasterEggCode && !_safeCode.HasBeenDiscovered;
 
         _feedbackText.text = guessed0451WithoutKnowing
             ? "Nice try!"
@@ -182,8 +163,7 @@ public class SafeCodePanelUI : MonoBehaviour {
         _digitsText.color = _wrongColour;
 
         if (attemptedCode == SafeCode.EasterEggCode) {
-            _feedbackText.text =
-                "Nice try! Wrong place.";
+            _feedbackText.text = "Nice try! Wrong place.";
         } else {
             RestoreDefaultFeedback();
         }
@@ -194,21 +174,16 @@ public class SafeCodePanelUI : MonoBehaviour {
     }
 
     private IEnumerator CompleteCorrectEntry() {
-        yield return new WaitForSecondsRealtime(
-            _feedbackDuration
-        );
+        yield return new WaitForSecondsRealtime(_feedbackDuration);
 
-        Action correctCodeEntered =
-            _correctCodeEntered;
+        Action correctCodeEntered = _correctCodeEntered;
 
         ClosePanel();
         correctCodeEntered?.Invoke();
     }
 
     private IEnumerator ResetAfterWrongEntry() {
-        yield return new WaitForSecondsRealtime(
-            _feedbackDuration
-        );
+        yield return new WaitForSecondsRealtime(_feedbackDuration);
 
         _digitsText.color = _normalColour;
         _acceptingInput = true;
@@ -232,8 +207,7 @@ public class SafeCodePanelUI : MonoBehaviour {
 
     private void RestoreDefaultFeedback() {
         if (_feedbackText != null) {
-            _feedbackText.text =
-                _defaultFeedbackText;
+            _feedbackText.text = _defaultFeedbackText;
         }
     }
 
@@ -249,13 +223,8 @@ public class SafeCodePanelUI : MonoBehaviour {
             '#'
         };
 
-        for (
-            int index = 0;
-            index < _enteredCode.Length;
-            index++
-        ) {
-            displayedCharacters[index] =
-                _enteredCode[index];
+        for (int index = 0; index < _enteredCode.Length; index++) {
+            displayedCharacters[index] = _enteredCode[index];
         }
 
         _digitsText.text =
@@ -266,73 +235,43 @@ public class SafeCodePanelUI : MonoBehaviour {
     }
 
     private int ReadPressedDigit(Keyboard keyboard) {
-        if (
-            keyboard.digit0Key.wasPressedThisFrame ||
-            keyboard.numpad0Key.wasPressedThisFrame
-        ) {
+        if (keyboard.digit0Key.wasPressedThisFrame || keyboard.numpad0Key.wasPressedThisFrame) {
             return 0;
         }
 
-        if (
-            keyboard.digit1Key.wasPressedThisFrame ||
-            keyboard.numpad1Key.wasPressedThisFrame
-        ) {
+        if (keyboard.digit1Key.wasPressedThisFrame || keyboard.numpad1Key.wasPressedThisFrame) {
             return 1;
         }
 
-        if (
-            keyboard.digit2Key.wasPressedThisFrame ||
-            keyboard.numpad2Key.wasPressedThisFrame
-        ) {
+        if (keyboard.digit2Key.wasPressedThisFrame || keyboard.numpad2Key.wasPressedThisFrame) {
             return 2;
         }
 
-        if (
-            keyboard.digit3Key.wasPressedThisFrame ||
-            keyboard.numpad3Key.wasPressedThisFrame
-        ) {
+        if (keyboard.digit3Key.wasPressedThisFrame || keyboard.numpad3Key.wasPressedThisFrame) {
             return 3;
         }
 
-        if (
-            keyboard.digit4Key.wasPressedThisFrame ||
-            keyboard.numpad4Key.wasPressedThisFrame
-        ) {
+        if (keyboard.digit4Key.wasPressedThisFrame || keyboard.numpad4Key.wasPressedThisFrame) {
             return 4;
         }
 
-        if (
-            keyboard.digit5Key.wasPressedThisFrame ||
-            keyboard.numpad5Key.wasPressedThisFrame
-        ) {
+        if (keyboard.digit5Key.wasPressedThisFrame || keyboard.numpad5Key.wasPressedThisFrame) {
             return 5;
         }
 
-        if (
-            keyboard.digit6Key.wasPressedThisFrame ||
-            keyboard.numpad6Key.wasPressedThisFrame
-        ) {
+        if (keyboard.digit6Key.wasPressedThisFrame || keyboard.numpad6Key.wasPressedThisFrame) {
             return 6;
         }
 
-        if (
-            keyboard.digit7Key.wasPressedThisFrame ||
-            keyboard.numpad7Key.wasPressedThisFrame
-        ) {
+        if (keyboard.digit7Key.wasPressedThisFrame || keyboard.numpad7Key.wasPressedThisFrame) {
             return 7;
         }
 
-        if (
-            keyboard.digit8Key.wasPressedThisFrame ||
-            keyboard.numpad8Key.wasPressedThisFrame
-        ) {
+        if (keyboard.digit8Key.wasPressedThisFrame || keyboard.numpad8Key.wasPressedThisFrame) {
             return 8;
         }
 
-        if (
-            keyboard.digit9Key.wasPressedThisFrame ||
-            keyboard.numpad9Key.wasPressedThisFrame
-        ) {
+        if (keyboard.digit9Key.wasPressedThisFrame || keyboard.numpad9Key.wasPressedThisFrame) {
             return 9;
         }
 

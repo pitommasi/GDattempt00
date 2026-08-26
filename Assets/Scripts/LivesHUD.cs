@@ -13,10 +13,7 @@ public class LivesHUD : MonoBehaviour {
 
     private void Start() {
         if (playerHealth == null) {
-            Debug.LogError(
-                $"{name}: assign PlayerHealth.",
-                this
-            );
+            Debug.LogError($"{name}: assign PlayerHealth.", this);
 
             enabled = false;
             return;

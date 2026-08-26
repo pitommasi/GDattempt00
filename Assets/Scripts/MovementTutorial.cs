@@ -19,15 +19,8 @@ public class MovementTutorial : MonoBehaviour {
     private bool _arrowsVisible = true;
 
     private void Start() {
-        if (
-            _player == null ||
-            _leftArrow == null ||
-            _rightArrow == null
-        ) {
-            Debug.LogError(
-                $"{name}: assign the Player and both tutorial arrows.",
-                this
-            );
+        if (_player == null || _leftArrow == null || _rightArrow == null) {
+            Debug.LogError($"{name}: assign the Player and both tutorial arrows.", this);
 
             enabled = false;
             return;
@@ -38,9 +31,7 @@ public class MovementTutorial : MonoBehaviour {
     }
 
     private void Update() {
-        float horizontalDistance = Mathf.Abs(
-            _player.position.x - _startingPlayerX
-        );
+        float horizontalDistance = Mathf.Abs(_player.position.x - _startingPlayerX);
 
         if (horizontalDistance >= _hideDistance) {
             gameObject.SetActive(false);

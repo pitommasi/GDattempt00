@@ -12,11 +12,9 @@ public class PlayerInventory : MonoBehaviour {
         Backyard
     }
 
-    private readonly HashSet<KeyType> _revealedKeyRequirements =
-        new HashSet<KeyType>();
+    private readonly HashSet<KeyType> _revealedKeyRequirements = new HashSet<KeyType>();
 
-    private readonly HashSet<KeyType> _collectedKeys =
-        new HashSet<KeyType>();
+    private readonly HashSet<KeyType> _collectedKeys = new HashSet<KeyType>();
 
     private int _cogCount;
     private int _fuelTankCount;
@@ -70,9 +68,7 @@ public class PlayerInventory : MonoBehaviour {
         return _collectedKeys.Contains(keyType);
     }
 
-    public bool IsKeyRequirementRevealed(
-        KeyType keyType
-    ) {
+    public bool IsKeyRequirementRevealed(KeyType keyType) {
         return _revealedKeyRequirements.Contains(keyType);
     }
 

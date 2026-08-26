@@ -36,27 +36,19 @@ public class SafeInteraction : InteractableBase {
         ResetSafe();
     }
 
-    protected override void Interact(
-        PlayerHealth player
-    ) {
+    protected override void Interact(PlayerHealth player) {
         // Hide the current prompt while entering the code,
         // but keep it enabled for later attempts.
         SetSafeBubblesVisible(false);
 
-        _codePanelUI.Open(
-            _safeCode,
-            OpenSafe
-        );
+        _codePanelUI.Open(_safeCode, OpenSafe);
     }
 
-    protected override void OnPlayerEnteredRange(
-        PlayerHealth player
-    ) {
+    protected override void OnPlayerEnteredRange(PlayerHealth player) {
         SetSafeBubblesVisible(false);
 
         if (_safeCode.HasBeenDiscovered) {
-            _knownCodeText.text =
-                FormatCode(_safeCode.CurrentCode);
+            _knownCodeText.text = FormatCode(_safeCode.CurrentCode);
 
             SetInteractionPrompt(_knownCodeBubble);
         } else {
@@ -66,9 +58,7 @@ public class SafeInteraction : InteractableBase {
         ShowInteractionPrompt();
     }
 
-    protected override void OnPlayerExitedRange(
-        PlayerHealth player
-    ) {
+    protected override void OnPlayerExitedRange(PlayerHealth player) {
         SetSafeBubblesVisible(false);
         _codePanelUI.Close();
     }
@@ -84,10 +74,7 @@ public class SafeInteraction : InteractableBase {
             _openSafe == null ||
             _backyardKey == null
         ) {
-            Debug.LogError(
-                $"{name}: complete every Safe Interaction assignment.",
-                this
-            );
+            Debug.LogError($"{name}: complete every Safe Interaction assignment.", this);
 
             return false;
         }
@@ -115,9 +102,7 @@ public class SafeInteraction : InteractableBase {
         _closedSafe.SetActive(false);
     }
 
-    private void SetSafeBubblesVisible(
-        bool visible
-    ) {
+    private void SetSafeBubblesVisible(bool visible) {
         if (_unknownCodeBubble != null) {
             _unknownCodeBubble.SetActive(visible);
         }

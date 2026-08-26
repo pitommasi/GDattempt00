@@ -11,10 +11,7 @@ public class AnimatedSpriteCopy : MonoBehaviour {
         displayRenderer = GetComponent<SpriteRenderer>();
 
         if (animatedSource == null) {
-            Debug.LogError(
-                $"{name}: assign the animated Sprite Renderer.",
-                this
-            );
+            Debug.LogError($"{name}: assign the animated Sprite Renderer.", this);
 
             enabled = false;
         }

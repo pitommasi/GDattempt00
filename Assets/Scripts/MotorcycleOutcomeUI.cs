@@ -23,10 +23,7 @@ public class MotorcycleOutcomeUI : MonoBehaviour {
         SetVictoryVisible(false);
 
         if (_missingPartsPanel == null || _victoryPanel == null) {
-            Debug.LogError(
-                $"{name}: assign both motorcycle outcome panels.",
-                this
-            );
+            Debug.LogError($"{name}: assign both motorcycle outcome panels.", this);
 
             enabled = false;
         }
@@ -71,9 +68,7 @@ public class MotorcycleOutcomeUI : MonoBehaviour {
 
         Time.timeScale = _timeScaleBeforeVictory;
 
-        SceneManager.LoadScene(
-            SceneManager.GetActiveScene().buildIndex
-        );
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void PlaySound(AudioClip sound) {

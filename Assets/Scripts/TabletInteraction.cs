@@ -31,38 +31,28 @@ public class TabletInteraction : InteractableBase {
         SetEasterEggBubbleVisible(false);
 
         if (_safeCode == null) {
-            Debug.LogError(
-                $"{name}: assign the Safe Code.",
-                this
-            );
+            Debug.LogError($"{name}: assign the Safe Code.", this);
 
             enabled = false;
             return;
         }
 
         if (_codePanel == null || _codeText == null) {
-            Debug.LogError(
-                $"{name}: assign the tablet code panel and text.",
-                this
-            );
+            Debug.LogError($"{name}: assign the tablet code panel and text.", this);
 
             enabled = false;
         }
     }
 
-    protected override void Interact(
-        PlayerHealth player
-    ) {
+    protected override void Interact(PlayerHealth player) {
         DisableInteractionPrompt();
 
         StopAllCoroutines();
         SetEasterEggBubbleVisible(false);
 
-        bool codeDiscoveredNow =
-            _safeCode.Discover();
+        bool codeDiscoveredNow = _safeCode.Discover();
 
-        _codeText.text =
-            FormatCode(_safeCode.CurrentCode);
+        _codeText.text = FormatCode(_safeCode.CurrentCode);
 
         SetCodePanelVisible(true);
 
@@ -72,20 +62,14 @@ public class TabletInteraction : InteractableBase {
 
         PlayDiscoverySound();
 
-        _easterEggReactionPending =
-            _safeCode.CurrentCode ==
-            SafeCode.EasterEggCode;
+        _easterEggReactionPending = _safeCode.CurrentCode == SafeCode.EasterEggCode;
     }
 
-    protected override void OnPlayerExitedRange(
-        PlayerHealth player
-    ) {
+    protected override void OnPlayerExitedRange(PlayerHealth player) {
         SetCodePanelVisible(false);
 
         if (_easterEggReactionPending) {
-            StartCoroutine(
-                ShowQueuedEasterEggReaction()
-            );
+            StartCoroutine(ShowQueuedEasterEggReaction());
         }
     }
 
@@ -94,9 +78,7 @@ public class TabletInteraction : InteractableBase {
 
         SetEasterEggBubbleVisible(true);
 
-        yield return new WaitForSecondsRealtime(
-            _easterEggBubbleDuration
-        );
+        yield return new WaitForSecondsRealtime(_easterEggBubbleDuration);
 
         SetEasterEggBubbleVisible(false);
     }
@@ -107,9 +89,7 @@ public class TabletInteraction : InteractableBase {
 
     private void PlayDiscoverySound() {
         if (_codeDiscoveredSound != null) {
-            _audioSource.PlayOneShot(
-                _codeDiscoveredSound
-            );
+            _audioSource.PlayOneShot(_codeDiscoveredSound);
         }
     }
 
@@ -119,9 +99,7 @@ public class TabletInteraction : InteractableBase {
         }
     }
 
-    private void SetEasterEggBubbleVisible(
-        bool visible
-    ) {
+    private void SetEasterEggBubbleVisible(bool visible) {
         if (_easterEggBubble != null) {
             _easterEggBubble.SetActive(visible);
         }

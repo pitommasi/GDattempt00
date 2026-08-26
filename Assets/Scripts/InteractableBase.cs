@@ -15,38 +15,25 @@ public abstract class InteractableBase : MonoBehaviour {
     private bool _promptEnabled = true;
 
     protected virtual void Awake() {
-        Collider2D interactionCollider =
-            GetComponent<Collider2D>();
+        Collider2D interactionCollider = GetComponent<Collider2D>();
 
         if (!interactionCollider.isTrigger) {
-            Debug.LogWarning(
-                $"{name}: enable Is Trigger on the interaction collider.",
-                this
-            );
+            Debug.LogWarning($"{name}: enable Is Trigger on the interaction collider.", this);
         }
 
         SetPromptVisible(false);
 
         if (InputSystem.actions == null) {
-            Debug.LogError(
-                $"{name}: no project-wide Input Actions asset was found.",
-                this
-            );
+            Debug.LogError($"{name}: no project-wide Input Actions asset was found.", this);
 
             enabled = false;
             return;
         }
 
-        _interactAction = InputSystem.actions.FindAction(
-            _interactActionPath,
-            throwIfNotFound: false
-        );
+        _interactAction = InputSystem.actions.FindAction(_interactActionPath, throwIfNotFound: false);
 
         if (_interactAction == null) {
-            Debug.LogError(
-                $"{name}: input action not found: {_interactActionPath}.",
-                this
-            );
+            Debug.LogError($"{name}: input action not found: {_interactActionPath}.", this);
 
             enabled = false;
             return;
@@ -58,11 +45,7 @@ public abstract class InteractableBase : MonoBehaviour {
     }
 
     private void Update() {
-        if (
-            !_interactionEnabled ||
-            _playerInRange == null ||
-            Time.timeScale == 0f
-        ) {
+        if (!_interactionEnabled || _playerInRange == null || Time.timeScale == 0f) {
             return;
         }
 
@@ -78,8 +61,7 @@ public abstract class InteractableBase : MonoBehaviour {
             return;
         }
 
-        PlayerHealth player =
-            other.GetComponentInParent<PlayerHealth>();
+        PlayerHealth player = other.GetComponentInParent<PlayerHealth>();
 
         if (player == null) {
             return;
@@ -92,8 +74,7 @@ public abstract class InteractableBase : MonoBehaviour {
     }
 
     private void OnTriggerExit2D(Collider2D other) {
-        PlayerHealth player =
-            other.GetComponentInParent<PlayerHealth>();
+        PlayerHealth player = other.GetComponentInParent<PlayerHealth>();
 
         if (player != _playerInRange) {
             return;
@@ -105,23 +86,15 @@ public abstract class InteractableBase : MonoBehaviour {
         OnPlayerExitedRange(player);
     }
 
-    protected abstract void Interact(
-        PlayerHealth player
-    );
+    protected abstract void Interact(PlayerHealth player);
 
-    protected virtual void OnPlayerEnteredRange(
-        PlayerHealth player
-    ) {
+    protected virtual void OnPlayerEnteredRange(PlayerHealth player) {
     }
 
-    protected virtual void OnPlayerExitedRange(
-        PlayerHealth player
-    ) {
+    protected virtual void OnPlayerExitedRange(PlayerHealth player) {
     }
 
-    protected void SetInteractionPrompt(
-        GameObject interactionPrompt
-    ) {
+    protected void SetInteractionPrompt(GameObject interactionPrompt) {
         SetPromptVisible(false);
         _interactionPrompt = interactionPrompt;
     }

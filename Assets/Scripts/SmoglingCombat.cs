@@ -53,10 +53,7 @@ public class SmoglingCombat : MonoBehaviour {
             return;
         }
 
-        PlaySound(
-            playerDeathSound,
-            player.transform.position
-        );
+        PlaySound(playerDeathSound, player.transform.position);
 
         player.TakeDamage();
     }
@@ -91,18 +88,14 @@ public class SmoglingCombat : MonoBehaviour {
             player.Bounce(playerBounceSpeed);
         }
 
-        PlaySound(
-            smoglingDeathSound,
-            transform.position
-        );
+        PlaySound(smoglingDeathSound, transform.position);
 
         if (deathVisual == null || deathRenderer == null) {
             Destroy(gameObject);
             yield break;
         }
 
-        SmoglingSizeShift sizeShift =
-            deathVisual.GetComponent<SmoglingSizeShift>();
+        SmoglingSizeShift sizeShift = deathVisual.GetComponent<SmoglingSizeShift>();
 
         if (sizeShift != null) {
             sizeShift.enabled = false;
@@ -116,27 +109,13 @@ public class SmoglingCombat : MonoBehaviour {
         while (elapsedSeconds < deathEffectSeconds) {
             elapsedSeconds += Time.deltaTime;
 
-            float progress = Mathf.Clamp01(
-                elapsedSeconds / deathEffectSeconds
-            );
+            float progress = Mathf.Clamp01(elapsedSeconds / deathEffectSeconds);
 
-            float smoothProgress = Mathf.SmoothStep(
-                0f,
-                1f,
-                progress
-            );
+            float smoothProgress = Mathf.SmoothStep(0f, 1f, progress);
 
-            float horizontalMultiplier = Mathf.Lerp(
-                1f,
-                finalHorizontalScale,
-                smoothProgress
-            );
+            float horizontalMultiplier = Mathf.Lerp(1f, finalHorizontalScale, smoothProgress);
 
-            float verticalMultiplier = Mathf.Lerp(
-                1f,
-                finalVerticalScale,
-                smoothProgress
-            );
+            float verticalMultiplier = Mathf.Lerp(1f, finalVerticalScale, smoothProgress);
 
             deathVisual.localScale = new Vector3(
                 startingScale.x * horizontalMultiplier,
@@ -146,11 +125,7 @@ public class SmoglingCombat : MonoBehaviour {
 
             Color currentColour = startingColour;
 
-            currentColour.a = Mathf.Lerp(
-                startingColour.a,
-                0f,
-                smoothProgress
-            );
+            currentColour.a = Mathf.Lerp(startingColour.a, 0f, smoothProgress);
 
             deathRenderer.color = currentColour;
 
@@ -160,21 +135,16 @@ public class SmoglingCombat : MonoBehaviour {
         Destroy(gameObject);
     }
 
-    private void PlaySound(
-        AudioClip clip,
-        Vector3 soundPosition
-    ) {
+    private void PlaySound(AudioClip clip, Vector3 soundPosition) {
         if (clip == null) {
             return;
         }
 
-        GameObject temporaryAudio =
-            new GameObject("Temporary death sound");
+        GameObject temporaryAudio = new GameObject("Temporary death sound");
 
         temporaryAudio.transform.position = soundPosition;
 
-        AudioSource audioSource =
-            temporaryAudio.AddComponent<AudioSource>();
+        AudioSource audioSource = temporaryAudio.AddComponent<AudioSource>();
 
         audioSource.clip = clip;
         audioSource.volume = soundVolume;
@@ -182,9 +152,6 @@ public class SmoglingCombat : MonoBehaviour {
 
         audioSource.Play();
 
-        Destroy(
-            temporaryAudio,
-            clip.length + 0.1f
-        );
+        Destroy(temporaryAudio, clip.length + 0.1f);
     }
 }

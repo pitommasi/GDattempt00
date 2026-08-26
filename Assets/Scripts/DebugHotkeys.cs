@@ -5,9 +5,7 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Rigidbody2D))]
 public class DebugHotkeys : MonoBehaviour {
     [Header("Debug")]
-    [Tooltip(
-        "Enables the debug restart and teleport keyboard shortcuts."
-    )]
+    [Tooltip("Enables the debug restart and teleport keyboard shortcuts.")]
     [SerializeField] private bool _debugMode = true;
 
     [Header("Teleport points")]
@@ -25,102 +23,53 @@ public class DebugHotkeys : MonoBehaviour {
 
     private void Update() {
         // enable teleport shortcuts for easier testing only for editor and dev build
-        #if UNITY_EDITOR || DEVELOPMENT_BUILD
-                if (!_debugMode || Keyboard.current == null) {
-                    return;
-                }
-        
-                if (
-                    Keyboard.current.rKey
-                        .wasPressedThisFrame
-                ) {
-                    RestartScene();
-                    return;
-                }
-        
-                if (
-                    Keyboard.current.pKey
-                        .wasPressedThisFrame
-                ) {
-                    TeleportTo(
-                        _playerSpawnPoint,
-                        "player spawn point"
-                    );
-        
-                    return;
-                }
-        
-                if (
-                    Keyboard.current.sKey
-                        .wasPressedThisFrame
-                ) {
-                    TeleportTo(
-                        _shopPoint,
-                        "shop"
-                    );
-        
-                    return;
-                }
-        
-                if (
-                    Keyboard.current.cKey
-                        .wasPressedThisFrame
-                ) {
-                    TeleportTo(
-                        _warehousePoint,
-                        "warehouse"
-                    );
-        
-                    return;
-                }
-        
-                if (
-                    Keyboard.current.bKey
-                        .wasPressedThisFrame
-                ) {
-                    TeleportTo(
-                        _backyardPoint,
-                        "backyard"
-                    );
-        
-                    return;
-                }
-        
-                if (
-                    Keyboard.current.oKey
-                        .wasPressedThisFrame
-                ) {
-                    TeleportTo(
-                        _safePoint,
-                        "safe"
-                    );
-                }
-        #endif
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+        if (!_debugMode || Keyboard.current == null) {
+            return;
+        }
+
+        if (Keyboard.current.rKey.wasPressedThisFrame) {
+            RestartScene();
+            return;
+        }
+
+        if (Keyboard.current.pKey.wasPressedThisFrame) {
+            TeleportTo(_playerSpawnPoint, "player spawn point");
+            return;
+        }
+
+        if (Keyboard.current.sKey.wasPressedThisFrame) {
+            TeleportTo(_shopPoint, "shop");
+            return;
+        }
+
+        if (Keyboard.current.cKey.wasPressedThisFrame) {
+            TeleportTo(_warehousePoint, "warehouse");
+            return;
+        }
+
+        if (Keyboard.current.bKey.wasPressedThisFrame) {
+            TeleportTo(_backyardPoint, "backyard");
+            return;
+        }
+
+        if (Keyboard.current.oKey.wasPressedThisFrame) {
+            TeleportTo(_safePoint, "safe");
+        }
+#endif
     }
 
     private void RestartScene() {
-        Debug.Log(
-            "DEBUG | Restarting current scene.",
-            this
-        );
+        Debug.Log("DEBUG | Restarting current scene.", this);
 
         Time.timeScale = 1f;
 
-        SceneManager.LoadScene(
-            SceneManager.GetActiveScene().buildIndex
-        );
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    private void TeleportTo(
-        Transform destination,
-        string destinationDescription
-    ) {
+    private void TeleportTo(Transform destination, string destinationDescription) {
         if (destination == null) {
-            Debug.LogWarning(
-                $"DEBUG | No teleport point assigned for " +
-                $"{destinationDescription}.",
-                this
-            );
+            Debug.LogWarning($"DEBUG | No teleport point assigned for " + $"{destinationDescription}.", this);
 
             return;
         }
@@ -131,9 +80,6 @@ public class DebugHotkeys : MonoBehaviour {
 
         Physics2D.SyncTransforms();
 
-        Debug.Log(
-            $"DEBUG | Teleported to {destinationDescription}.",
-            this
-        );
+        Debug.Log($"DEBUG | Teleported to {destinationDescription}.", this);
     }
 }

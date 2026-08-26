@@ -11,10 +11,7 @@ public class InstructionsPanelUI : MonoBehaviour {
 
     private void Awake() {
         if (_instructionsPanel == null) {
-            Debug.LogError(
-                $"{name}: assign the instructions panel.",
-                this
-            );
+            Debug.LogError($"{name}: assign the instructions panel.", this);
 
             enabled = false;
             return;
@@ -23,10 +20,7 @@ public class InstructionsPanelUI : MonoBehaviour {
         _helpAction = InputSystem.actions.FindAction("Player/Help");
 
         if (_helpAction == null) {
-            Debug.LogError(
-                $"{name}: Player/Help was not found in the project-wide Input Actions.",
-                this
-            );
+            Debug.LogError($"{name}: Player/Help was not found in the project-wide Input Actions.", this);
 
             enabled = false;
             return;

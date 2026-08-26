@@ -38,24 +38,13 @@ public class GameOverUI : MonoBehaviour {
         while (elapsedSeconds < growSeconds) {
             elapsedSeconds += Time.unscaledDeltaTime;
 
-            float progress = Mathf.Clamp01(
-                elapsedSeconds / growSeconds
-            );
+            float progress = Mathf.Clamp01(elapsedSeconds / growSeconds);
 
-            float smoothProgress = Mathf.SmoothStep(
-                0f,
-                1f,
-                progress
-            );
+            float smoothProgress = Mathf.SmoothStep(0f, 1f, progress);
 
-            float currentScale = Mathf.Lerp(
-                startingScale,
-                1f,
-                smoothProgress
-            );
+            float currentScale = Mathf.Lerp(startingScale, 1f, smoothProgress);
 
-            _rectTransform.localScale =
-                Vector3.one * currentScale;
+            _rectTransform.localScale = Vector3.one * currentScale;
 
             yield return null;
         }
@@ -69,7 +58,6 @@ public class GameOverUI : MonoBehaviour {
         _canvasGroup.interactable = false;
         _canvasGroup.blocksRaycasts = false;
 
-        _rectTransform.localScale =
-            Vector3.one * startingScale;
+        _rectTransform.localScale = Vector3.one * startingScale;
     }
 }

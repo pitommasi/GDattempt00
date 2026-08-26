@@ -42,22 +42,13 @@ public class SmoglingSizeShift : MonoBehaviour {
 
     private IEnumerator ChangeSizeRoutine() {
         while (true) {
-            float pauseSeconds = Random.Range(
-                minimumPauseSeconds,
-                maximumPauseSeconds
-            );
+            float pauseSeconds = Random.Range(minimumPauseSeconds, maximumPauseSeconds);
 
             yield return new WaitForSeconds(pauseSeconds);
 
-            float targetMultiplier = Random.Range(
-                minimumScaleMultiplier,
-                maximumScaleMultiplier
-            );
+            float targetMultiplier = Random.Range(minimumScaleMultiplier, maximumScaleMultiplier);
 
-            float transitionSeconds = Random.Range(
-                minimumTransitionSeconds,
-                maximumTransitionSeconds
-            );
+            float transitionSeconds = Random.Range(minimumTransitionSeconds, maximumTransitionSeconds);
 
             Vector3 scaleAtStart = transform.localScale;
             Vector3 targetScale = normalScale * targetMultiplier;
@@ -67,21 +58,11 @@ public class SmoglingSizeShift : MonoBehaviour {
             while (elapsedSeconds < transitionSeconds) {
                 elapsedSeconds += Time.deltaTime;
 
-                float progress = Mathf.Clamp01(
-                    elapsedSeconds / transitionSeconds
-                );
+                float progress = Mathf.Clamp01(elapsedSeconds / transitionSeconds);
 
-                float smoothProgress = Mathf.SmoothStep(
-                    0f,
-                    1f,
-                    progress
-                );
+                float smoothProgress = Mathf.SmoothStep(0f, 1f, progress);
 
-                transform.localScale = Vector3.Lerp(
-                    scaleAtStart,
-                    targetScale,
-                    smoothProgress
-                );
+                transform.localScale = Vector3.Lerp(scaleAtStart, targetScale, smoothProgress);
 
                 yield return null;
             }
