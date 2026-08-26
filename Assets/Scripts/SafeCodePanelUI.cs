@@ -183,7 +183,7 @@ public class SafeCodePanelUI : MonoBehaviour {
 
         if (attemptedCode == SafeCode.EasterEggCode) {
             _feedbackText.text =
-                "Nice try!\nWrong place.";
+                "Nice try! Wrong place.";
         } else {
             RestoreDefaultFeedback();
         }
