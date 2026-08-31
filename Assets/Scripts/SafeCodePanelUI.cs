@@ -10,10 +10,34 @@ public class SafeCodePanelUI : MonoBehaviour {
     private const float _feedbackDuration = 0.75f;
 
     private static readonly Color _normalColour = Color.white;
-
     private static readonly Color _wrongColour = new Color(1f, 0.25f, 0.25f);
-
     private static readonly Color _correctColour = new Color(0.35f, 1f, 0.35f);
+
+    private static readonly Key[] _numberRowKeys = {
+        Key.Digit0,
+        Key.Digit1,
+        Key.Digit2,
+        Key.Digit3,
+        Key.Digit4,
+        Key.Digit5,
+        Key.Digit6,
+        Key.Digit7,
+        Key.Digit8,
+        Key.Digit9
+    };
+
+    private static readonly Key[] _numpadKeys = {
+        Key.Numpad0,
+        Key.Numpad1,
+        Key.Numpad2,
+        Key.Numpad3,
+        Key.Numpad4,
+        Key.Numpad5,
+        Key.Numpad6,
+        Key.Numpad7,
+        Key.Numpad8,
+        Key.Numpad9
+    };
 
     [Header("Safe code panel")]
     [SerializeField] private GameObject _panelRoot;
@@ -142,7 +166,9 @@ public class SafeCodePanelUI : MonoBehaviour {
         _codeAccepted = true;
         _digitsText.color = _correctColour;
 
-        bool guessed0451WithoutKnowing = _enteredCode == SafeCode.EasterEggCode && !_safeCode.HasBeenDiscovered;
+        bool guessed0451WithoutKnowing =
+            _enteredCode == SafeCode.EasterEggCode &&
+            !_safeCode.HasBeenDiscovered;
 
         _feedbackText.text = guessed0451WithoutKnowing
             ? "Nice try!"
@@ -235,44 +261,16 @@ public class SafeCodePanelUI : MonoBehaviour {
     }
 
     private int ReadPressedDigit(Keyboard keyboard) {
-        if (keyboard.digit0Key.wasPressedThisFrame || keyboard.numpad0Key.wasPressedThisFrame) {
-            return 0;
-        }
+        for (int digit = 0; digit < _numberRowKeys.Length; digit++) {
+            bool numberRowPressed =
+                keyboard[_numberRowKeys[digit]].wasPressedThisFrame;
 
-        if (keyboard.digit1Key.wasPressedThisFrame || keyboard.numpad1Key.wasPressedThisFrame) {
-            return 1;
-        }
+            bool numpadPressed =
+                keyboard[_numpadKeys[digit]].wasPressedThisFrame;
 
-        if (keyboard.digit2Key.wasPressedThisFrame || keyboard.numpad2Key.wasPressedThisFrame) {
-            return 2;
-        }
-
-        if (keyboard.digit3Key.wasPressedThisFrame || keyboard.numpad3Key.wasPressedThisFrame) {
-            return 3;
-        }
-
-        if (keyboard.digit4Key.wasPressedThisFrame || keyboard.numpad4Key.wasPressedThisFrame) {
-            return 4;
-        }
-
-        if (keyboard.digit5Key.wasPressedThisFrame || keyboard.numpad5Key.wasPressedThisFrame) {
-            return 5;
-        }
-
-        if (keyboard.digit6Key.wasPressedThisFrame || keyboard.numpad6Key.wasPressedThisFrame) {
-            return 6;
-        }
-
-        if (keyboard.digit7Key.wasPressedThisFrame || keyboard.numpad7Key.wasPressedThisFrame) {
-            return 7;
-        }
-
-        if (keyboard.digit8Key.wasPressedThisFrame || keyboard.numpad8Key.wasPressedThisFrame) {
-            return 8;
-        }
-
-        if (keyboard.digit9Key.wasPressedThisFrame || keyboard.numpad9Key.wasPressedThisFrame) {
-            return 9;
+            if (numberRowPressed || numpadPressed) {
+                return digit;
+            }
         }
 
         return -1;
