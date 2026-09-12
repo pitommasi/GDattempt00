@@ -30062,6 +30062,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameOverUI
   growSeconds: 0.25
   startingScale: 0.05
+  _musicSource: {fileID: 338489213}
+  _gameOverMusic: {fileID: 8300000, guid: d90539241bcee6b4a99fd5a4af128dbf, type: 3}
 --- !u!225 &1532111464
 CanvasGroup:
   m_ObjectHideFlags: 0
