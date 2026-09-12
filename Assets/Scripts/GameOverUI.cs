@@ -11,6 +11,10 @@ public class GameOverUI : MonoBehaviour {
     [Range(0.01f, 1f)]
     [SerializeField] private float startingScale = 0.05f;
 
+    [Header("Game-over music")]
+    [SerializeField] private AudioSource _musicSource;
+    [SerializeField] private AudioClip _gameOverMusic;
+
     private RectTransform _rectTransform;
     private CanvasGroup _canvasGroup;
     private Coroutine _growRoutine;
@@ -27,7 +31,20 @@ public class GameOverUI : MonoBehaviour {
             StopCoroutine(_growRoutine);
         }
 
+        PlayGameOverMusic();
+
         _growRoutine = StartCoroutine(GrowRoutine());
+    }
+
+    private void PlayGameOverMusic() {
+        if (_musicSource == null || _gameOverMusic == null) {
+            return;
+        }
+
+        _musicSource.Stop();
+        _musicSource.loop = false;
+        _musicSource.clip = _gameOverMusic;
+        _musicSource.Play();
     }
 
     private IEnumerator GrowRoutine() {
@@ -39,9 +56,7 @@ public class GameOverUI : MonoBehaviour {
             elapsedSeconds += Time.unscaledDeltaTime;
 
             float progress = Mathf.Clamp01(elapsedSeconds / growSeconds);
-
             float smoothProgress = Mathf.SmoothStep(0f, 1f, progress);
-
             float currentScale = Mathf.Lerp(startingScale, 1f, smoothProgress);
 
             _rectTransform.localScale = Vector3.one * currentScale;
